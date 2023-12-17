@@ -1,0 +1,101 @@
+
+<div class="logout-container">
+    <span class="logout-icon" onclick="toggleDropdown">
+        <img class="login-image" src="assets/images/user.png" alt="Login">
+    </span>
+    <div class="logout-dropdown" id="dropdown">
+        <button onclick="changePassword">Change Password</button>
+        <button onclick="logout">Logout</button>
+    </div>
+</div>
+<div>
+<body class="panal">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+</head>
+    <body class="navbody">
+        <!-- <input type="checkbox" id="check">
+        <label for="check">
+            <i class="fas fa-bars" id="btn"></i>
+            <i class="fas fa-times" id="cancel"></i>
+        </label> -->
+        <div class="sidebar">
+            <header>Menu</header>
+            <a routerLink="/admin_dashboard"> 
+            <i class="fas fa-qrcode"></i>
+            <span>Dashboard</span>
+            </a>
+            <a routerLink="/co-registration"> 
+            <i class="far fa-caret-square-right"></i>
+            <span>Coordinator Register</span>
+            </a>
+        <a routerLink="/hod-register"> 
+            <i class="far fa-caret-square-right"></i>
+            <span>HOD Register</span>
+            </a>
+            <a routerLink="/department_detail"> 
+            <i class="far fa-caret-square-right"></i>
+            <span>Department Details</span>
+            </a>
+        <a routerLink="/add_other_payment">
+            <i class="far fa-caret-square-right"></i>
+            <span>Add Other Payment</span>
+            </a>
+        <a routerLink="/salary_report">
+            <i class="far fa-caret-square-right"></i>
+            <span>salary report generator</span>
+            </a>
+
+            <a routerLink="/addfaculty">
+                <i class="far fa-caret-square-right"></i>
+                 <span>Add Faculty</span>
+               </a>
+            <!-- <a href="#">
+            <i class="far fa-question-circle"></i>
+            <span>About</span>
+            </a>
+        
+            <a href="#">
+            <i class="far fa-envelope"></i>
+            <span>Contact</span>
+            </a> -->
+        </div>
+    </body>
+
+    <div class="container">
+        <div class="logout-list_container">
+            <h3>Lecturer Name List</h3>
+            <div class="Lecturer_Name_List">
+                <div class="header">
+                    <div class="search-bar">
+                        <input type="text" class="search-input" placeholder="Search">
+                        <button class="search-button">Search</button>
+                    </div>
+                </div>    
+            </div>
+        </div>
+
+        <div class="coordinator-dashboard">
+            <div class="lecturer-list">
+                <!-- Use Angular *ngFor directive to iterate through LecturerArray -->
+                <span *ngFor="let lecturer of LecturerArray">
+                    <div class="lecturer-item">
+                        <span class="lecturer-name">{{ lecturer.Title }} {{ lecturer.LecturerName }}</span>
+                        <!-- Edit button -->
+                        <button class="lecview-button" (click)="editLecturer(lecturer)">Edit</button>
+                    </div>
+                </span>
+            </div>
+
+            <!-- Modal for viewing lecturer details -->
+            <div class="modal fade" id="lecturerDetailsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <!-- Add content for the lecturer details modal if needed -->
+                </div>
+            </div>
+        </div>
+    </div>
+   
+</body>
+</div>

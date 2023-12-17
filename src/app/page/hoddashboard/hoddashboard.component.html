@@ -1,0 +1,23 @@
+<h2>IT department</h2>
+
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Lecturer Name</th>
+                <th>Module</th>
+                <th>Hours</th>
+                <th>HOD Approval</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let lecturer of LecturerArray">
+                <td>{{ lecturer.LecturerName }}</td>
+                <td>{{ getModuleName(lecturer.LecturerName) }}</td>
+                <td>{{ getHours(lecturer.LecturerName) }}</td>
+                <td><button (click)="approveLecturer(lecturer)">Approve</button></td>
+                <td><button class="view-button" [routerLink]="['/lecturer', lecturer.LecturerName]">View</button></td>
+            </tr>
+        </tbody>
+    </table>
+</body>

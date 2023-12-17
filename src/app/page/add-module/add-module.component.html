@@ -1,0 +1,97 @@
+<div class="logout-container">
+  <span class="logout-icon" onclick="toggleDropdown">
+      <img class="login-image" src="assets/images/user.png" alt="Login">
+  </span>
+  <div class="logout-dropdown" id="dropdown">
+      <button onclick="changePassword">Change Password</button>
+      <button onclick="logout">Logout</button>
+  </div>
+</div>
+
+<body>
+  <head>
+      <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+   <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+     </head>
+     <body class="navbody">
+       <!-- <input type="checkbox" id="check">
+       <label for="check">
+         <i class="fas fa-bars" id="btn"></i>
+         <i class="fas fa-times" id="cancel"></i>
+       </label> -->
+       <div class="sidebar">
+         <header>Menu</header>
+         <a routerLink="/codashboard"class="active">
+           <i class="fas fa-qrcode"></i>
+           <span>Dashboard</span>
+         </a>
+         <a routerLink="/codashboard"> 
+          <i class="far fa-caret-square-right"></i>
+           <span>Lecturer Name List</span>
+         </a>
+        <a routerLink="/add_modul"> 
+           <i class="far fa-caret-square-right"></i>
+           <span>Add New Module</span>
+         </a>
+         <a routerLink="/add_batch"> 
+          <i class="far fa-caret-square-right"></i>
+           <span>Add New Batch</span>
+         </a>
+        <a routerLink="/lecregister">
+          <i class="far fa-caret-square-right"></i>
+           <span>Add New Lecturer</span>
+         </a>
+         <!-- <a href="#">
+           <i class="far fa-question-circle"></i>
+           <span>About</span>
+         </a>
+        
+         <a href="#">
+           <i class="far fa-envelope"></i>
+           <span>Contact</span>
+         </a> -->
+       </div>
+   </body>
+<div class="wrapper">
+    <h3>Add New Module</h3>
+    <div class="form-container">
+      <div class="form-field">
+        <label for="modulename">Module Name:</label>
+        <input type="text" id="modulename" [(ngModel)]="ModuleName" name="ModuleName" required>
+      </div>
+      <div class="form-field">
+        <label for="modulecode">Module Code:</label>
+        <input type="text" [(ngModel)]="ModuleCode" [ngModelOptions]="{standalone: true}" id="name" name="name" required>
+      </div>
+      <div class="form-field">
+        <label for="lecturerSelect">Select Lecturer:</label>
+        <select id="lecturerSelect" [(ngModel)]="selectedLecturer" name="lecturerSelect" required>
+          <option *ngFor="let lecturer of LecturerArray" [value]="lecturer.LecturerName">{{ lecturer.LecturerName }}</option>
+        </select>
+      </div>
+
+      <!-- <div class="form-field">
+        <label for="lecturername">Lecturer Name:</label>
+        <select id="lecturername" [(ngModel)]="LecturerName" name="LecturerName" required>
+          <option *ngFor="let lecturer of LecturerArray" [value]="lecturer.LecturerName">{{ lecturer.LecturerName }}</option>
+        </select>
+      </div> -->
+      <div class="form-field">
+        <label for="hours">Hours:</label>
+        <select id="hours" [(ngModel)]="Hours" [ngModelOptions]="{standalone: true}">
+          <option value="2">2 Hour</option>
+          <option value="3">3 Hours</option>
+          <option value="4">4 Hours</option>
+          <option value="5">5 Hours</option>
+          <option value="6">6 Hours</option>
+        </select>
+      </div>
+      <div class="bottom-buttons">
+        <!-- <button class="delete-button">Delete</button> -->
+        <button (click)="save()" class="delete-button" >Add <i class="zmdi zmdi-arrow-right"></i></button>
+      </div>
+    </div>
+  </div>
+  
+</body>
+<!-- ===================================================================================================================================== -->

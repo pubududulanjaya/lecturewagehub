@@ -1,0 +1,22 @@
+<div>
+  <h2>Lecturer Details</h2>
+  <div>
+    <p><strong>Lecturer Name:</strong> {{ lecturer.LecturerName }}</p>
+    <p><strong>Title:</strong> {{ lecturer.Title }}</p>
+    <p><strong>Mobile Number:</strong> {{ lecturer.MobileNumber }}</p>
+    <p><strong>NIC:</strong> {{ lecturer.NIC }}</p>
+    <p><strong>Address:</strong> {{ lecturer.AddressLine1 }}, {{ lecturer.AddressLine2 }}, {{ lecturer.State }}</p>
+    <p><strong>Email:</strong> {{ lecturer.Email }}</p>
+    <p><strong>Salary Type:</strong> {{ lecturer.SalaryType }}</p>
+    <p *ngIf="lecturer.SalaryType === 'Monthly payment'"><strong>Monthly Payment:</strong> {{ lecturer.MonthlyPayment }}</p>
+    <p><strong>Bank Details:</strong></p>
+    <ul>
+      <li><strong>Account Name:</strong> {{ lecturer.AccountName }}</li>
+      <li><strong>Account Number:</strong> {{ lecturer.AccountNumber }}</li>
+      <li><strong>Bank Name:</strong> {{ lecturer.BankName }}</li>
+      <li><strong>Bank Code:</strong> {{ lecturer.bankCode }}</li>
+      <li><strong>Branch Name:</strong> {{ lecturer.BranchName }}</li>
+      <li><strong>Branch Code:</strong> {{ lecturer.BranchCode }}</li>
+    </ul>
+  </div>
+</div>

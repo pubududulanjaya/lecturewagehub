@@ -1,0 +1,110 @@
+body {
+    background: rgb(99, 39, 120)
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #BA68C8
+}
+
+.profile-button {
+    background: rgb(99, 39, 120);
+    box-shadow: none;
+    border: none
+}
+
+.profile-button:hover {
+    background: #682773
+}
+
+.profile-button:focus {
+    background: #682773;
+    box-shadow: none
+}
+
+.profile-button:active {
+    background: #682773;
+    box-shadow: none
+}
+
+.back:hover {
+    color: #682773;
+    cursor: pointer
+}
+
+.labels {
+    font-size: 18px
+}
+
+.add-experience:hover {
+    background: #BA68C8;
+    color: #fff;
+    cursor: pointer;
+    border: solid 1px #BA68C8
+}
+.row{
+    --bs-gutter-x: 3.5rem;
+    --bs-gutter-y: 0.8rem;
+}
+
+/* drop down */
+
+/* Style the container div */
+.col-md-12 {
+    margin-bottom: 20px; /* Adjust this as needed */
+}
+
+/* Style the label */
+.labels {
+    font-weight: bold;
+}
+
+/* Style the select element (dropdown) */
+#title {
+    width: 100%; /* Adjust the width as needed */
+    padding: 10px; /* Adjust the padding as needed */
+    border: 1px solid #ccc; /* Add a border as desired */
+    border-radius: 4px; /* Round the corners if you like */
+}
+
+/* Style the dropdown options */
+#title option {
+    padding: 10px; /* Adjust the padding as needed */
+}
+
+/* delete button */
+
+.container {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    
+    padding: 20px;
+}
+
+
+
+.delete-button {
+    position: absolute;
+    bottom: 60px; /* Adjust the bottom distance as needed */
+    right: 20px; /* Adjust the right distance as needed */
+    background-color: red; /* Button background color */
+    color: white; /* Button text color */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Add any additional styling as needed */
+#backButton {
+    position: fixed;
+    top: 20px; /* Adjust the top position as needed */
+    right: 20px; /* Adjust the right position as needed */
+    z-index: 999; /* To make sure it's on top of other elements */
+    background-color: #0074D9;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+  }

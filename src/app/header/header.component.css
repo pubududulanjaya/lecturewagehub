@@ -1,0 +1,36 @@
+
+
+/* CSS for the toolbar */
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #05007d;
+  padding: 10px;
+}
+
+/* Style the logo image */
+.logo {
+  width: 166px;
+}
+
+/* Style the navigation bar */
+.navbar {
+  display: flex;
+  align-items: center;
+}
+
+/* Style the back button */
+.back-button {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* On hover, darken the back button */
+.back-button:hover {
+  background-color: #d32f2f;
+}

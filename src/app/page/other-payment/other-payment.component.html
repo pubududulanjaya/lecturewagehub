@@ -1,0 +1,22 @@
+<a class="back-button" routerLink="/admin_dashboard">Back</a>
+
+<body>
+  
+    <form action="process_form.php" method="post">
+  
+      <h1><b>Other Payments</b></h1><br><br>
+      
+      <label for="lecturer">Lecturer Name:</label>
+      <select id="lecturerSelect" [(ngModel)]="selectedLecturer" name="lecturerSelect" required>
+        <option *ngFor="let lecturer of LecturerArray" [value]="lecturer.LecturerName">{{ lecturer.LecturerName }}</option>
+    </select>
+  
+      <label for="description">Description:</label>
+      <textarea id="description" [(ngModel)]="Description" [ngModelOptions]="{standalone: true}" name="description" rows="4" placeholder="Type a description..."></textarea>
+  
+      <label for="totalSalary">Total Payments:</label>
+      <input type="text" [(ngModel)]="TotalPayments" [ngModelOptions]="{standalone: true}" id="totalSalary" name="totalSalary" placeholder="Enter total Payments">
+  
+      <button (click)="save()">Submit <i class="zmdi zmdi-arrow-right"></i></button>
+    </form>
+  </body>

@@ -1,0 +1,451 @@
+/* Reset some default styles */
+body {
+  background: #EEE;
+  overflow-x: hidden;
+  font-family: Arial, sans-serif;
+
+  display: flex;
+    grid-template-columns: 250px 1fr; /* Adjust the column widths as needed */
+}
+*{
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+:root {
+  --accent-color: #fff;
+  --gradient-color: #FBFBFB;
+}
+.navbody{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: -110px;
+  align-items: center;
+   width: 22vw;
+   margin-top: 0px;
+  height: 100vh;
+  background-image: linear-gradient(-45deg, #e3eefe 0%, #efddfb 100%);
+}
+
+.sidebar{
+  /* position: fixed; */
+  width: 240px;
+  left: -240px;
+  height: 100%;
+  background-color: #fff;
+  transition: all .5s ease;
+}
+.sidebar header{
+  font-size: 28px;
+  color: #353535;
+  line-height: 70px;
+  text-align: center;
+  background-color: #fff;
+  user-select: none;
+  font-family: 'Lato', sans-serif;
+}
+.sidebar a{
+  display: block;
+  height: 65px;
+  width: 100%;
+  color: #353535;
+  line-height: 65px;
+  padding-left: 30px;
+  box-sizing: border-box;
+  border-left: 5px solid transparent;
+  font-family: 'Lato', sans-serif;
+  transition: all .5s ease;
+}
+a.active,a:hover{
+  border-left: 5px solid var(--accent-color);
+  color: #fff;
+   background: linear-gradient(to left, var(--accent-color), var(--gradient-color));
+}
+.sidebar a i{
+  font-size: 23px;
+  margin-right: 16px;
+}
+.sidebar a span{
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+#check{
+  display: none;
+}
+label #btn,label #cancel{
+  margin-top: 10px;
+  position: absolute;
+  left: 5px;
+  cursor: pointer;
+  color: #d6adff;
+  border-radius: 5px;
+  margin: 15px 30px;
+  font-size: 29px;
+  background-color: #e8d1ff;
+  box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+    inset -7px -7px 10px 0px rgba(0,0,0,.1),
+   3.5px 3.5px 20px 0px rgba(0,0,0,.1),
+   2px 2px 5px 0px rgba(0,0,0,.1);
+  height: 45px;
+  width: 45px;
+  text-align: center;
+  text-shadow: 2px 2px 3px rgba(255,255,255,0.5);
+  line-height: 45px;
+  transition: all .5s ease;
+}
+label #cancel{
+  opacity: 0;
+  visibility: hidden;
+}
+#check:checked ~ .sidebar{
+  left: 0;
+}
+#check:checked ~ label #btn{
+  margin-left: 245px;
+  opacity: 0;
+  visibility: hidden;
+}
+#check:checked ~ label #cancel{
+  margin-left: 245px;
+  opacity: 1;
+  visibility: visible;
+}
+@media(max-width : 860px){
+  .sidebar{
+    height: auto;
+    width: 70px;
+    left: 0;
+    margin: 100px 0;
+  }
+  header,#btn,#cancel{
+    display: none;
+  }
+  span{
+    position: absolute;
+    margin-left: 23px;
+    opacity: 0;
+    visibility: hidden;
+  }
+  .sidebar a{
+    height: 60px;
+  }
+  .sidebar a i{
+    margin-left: -10px;
+  }
+  a:hover {
+    width: 200px;
+    background: inherit;
+  }
+  .sidebar a:hover span{
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.sidebar > a.active,.sidebar > a:hover:nth-child(even) {
+  --accent-color: #52d6f4;
+  --gradient-color: #c1b1f7;
+}
+.sidebar a.active,.sidebar > a:hover:nth-child(odd) {
+  --accent-color: #c1b1f7;
+  --gradient-color: #A890FE;
+}
+
+
+.frame {
+  width: 50%;
+  height: 30%;
+  margin: auto;
+  text-align: center;
+}
+
+h2 {
+  position: relative;
+  text-align: center;
+  color: #353535;
+  font-size: 60px;
+  font-family: 'Lato', sans-serif;
+  margin: 0;
+  color: #a759f5;
+}
+
+p {
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  text-align: center;
+  font-size: 30px;
+  color: #d6adff;
+  margin: 0;
+}
+.container {
+  position: relative;
+  margin: 0 auto;
+  /* padding: 50px 0; */
+  clear: both;
+  width: 10px;
+  margin-left: 120px; /* Adjust this value to leave space for the menu */
+  padding: 10px;
+  margin-right: 100px;
+}
+
+@media only screen and (min-width: 1200px) {
+  .container {
+      width: 1460px;
+  }
+}
+
+/* Add media queries for other screen sizes as needed */
+@media only screen and (min-width: 960px) and (max-width: 1199px) {
+  .container {
+      width: 1030px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+  .container {
+      width: 1200px;
+  }
+}
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+  .container {
+      width: 428px;
+      margin: 0 auto;
+  }
+}
+
+@media only screen and (max-width: 479px) {
+  .container {
+      width: 320px;
+      margin: 0 auto;
+  }
+}
+
+
+
+/* Back button style */
+.back-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background-color: #0074D9;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+/* Add hover effect to the back button */
+.back-button:hover {
+  background-color: #0056b3;
+}
+
+/* Logout icon and dropdown */
+.logout-container {
+  position: absolute;
+  top: 10px;
+  right: -50px;
+}
+
+.logout-list-container {
+  position: absolute;
+  top: 10px;
+  right: 400px;
+  padding: 10px;
+}
+
+
+/* Logout icon style */
+.logout-icon {
+  font-size: 45px;
+  cursor: pointer;
+  margin-right: 100px;
+  color: #181717; /* Change the color as needed */
+}
+
+/* Logout dropdown menu style */
+.logout-dropdown {
+  display: none;
+  position: absolute;
+  top: 40px;
+  left: -100px;
+  background-color: #000000;
+  border: 1px solid #0d0a0a;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  color: #000; /* Change text (font) color to black */
+}
+
+/* Style for dropdown items (buttons) */
+.logout-dropdown button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 0.3s;
+}
+
+.logout-dropdown button:hover {
+  background-color: #3a3535;
+}
+
+/* Show the dropdown when hovering over the container */
+.logout-container:hover .logout-dropdown {
+  display: block;
+}
+
+/* Style for the login image */
+.login-image {
+  padding-top: 13px;
+  width: 40px;
+  height: 40px;
+}
+/* ======================================================================================================================== */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #8bbaf8;
+  margin: 0;
+  padding: 40px;
+  border-radius: 10px;
+}
+.wrapper {
+min-height: 100vh;
+background-size: cover;
+background-repeat: no-repeat;
+
+
+}
+
+.form-container {
+  max-width: 500px;
+  margin: -35px auto;
+  background-color: #bfdbee;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 70px;
+  display: flex;
+  margin-left: 300px;
+  width: 59%;
+  flex-direction: column;
+}
+
+.form-field {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+label {
+  font-weight: bold;
+}
+
+select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding-right: 40%;
+}
+
+input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding-right: 20%;
+}
+
+.bottom-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.Add-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  width: 70px;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-left: 40%;
+}
+
+.delete-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+h3 {
+  text-align: center;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  padding: 90px;
+  margin-top: 10px;
+  margin-left: 385px;
+  font-size: 28px;
+  color: #fff;
+}.back-button {
+  position: absolute;
+  top: 20px; /* Adjust the top position as needed */
+  right: 20px; /* Adjust the right position as needed */
+  padding: 10px 20px;
+  background-color: #0074D9;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+/* Add hover effect to the button */
+.back-button:hover {
+  background-color: #0056b3;
+}
+
+/* Your existing styles go here */
+
+@media only screen and (max-width: 768px) {
+body {
+    display: block;
+}
+
+nav {
+    margin-top: 0;
+}
+
+.container {
+    margin: 0;
+    padding: 10px;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.mcd-menu {
+    width: 100%;
+    margin-left: 0;
+}
+
+.logout-container {
+    top: 0;
+    right: 0;
+    margin-right: 10px;
+}
+
+.form-container {
+    width: 100%;
+    margin-left: 0;
+    padding: 20px;
+}
+
+h3 {
+    margin-left: 10px;
+    padding: 20px;
+}
+}

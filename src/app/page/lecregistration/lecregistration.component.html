@@ -1,0 +1,174 @@
+<!-- Add the Bootstrap CSS CDN -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
+
+<!-- Add jQuery CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Add the Bootstrap JavaScript CDN (Bootstrap Bundle includes Popper.js) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js">
+</script>
+<button id="backButton" class="btn btn-secondary" routerLink="/codashboard">Back</button>
+
+<div class="container rounded bg-white mt-5 mb-5">
+  <div class="row">
+      <div class="col-md-3 border-right">
+          <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span><div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Upload Profile Image</button></div> </span></div>
+          <div class="row mt-2">
+            <div class="col-md-12">
+               <label class="labels">Lecturer ID</label>
+               <input type="text" [(ngModel)]="lecturerId" class="form-control" placeholder="Lecturer ID" disabled>
+            </div>
+         </div>
+          <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Upload cv</button></div>
+      </div>
+      <div class="col-md-5 border-right">
+          <div class="p-3 py-5">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h4 class="text-right">Profile Settings</h4>
+              </div>
+              <div class="row mt-2">
+                  
+                  <div class="col-md-12"><label class="labels">lecturer Name</label>
+                      <input type="text" [(ngModel)]="LecturerName" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Enter lecturer Name" value="">
+                  </div>
+                 
+              </div>
+              <div class="row mt-3">
+                  <div class="col-md-12"><label class="labels">Title</label>
+                      <select id="title" [(ngModel)]="Title" [ngModelOptions]="{standalone: true}" name="title">
+                          <option value="Dr.">Dr.</option>
+                          <option value="captain.">Captain.</option>
+                          <option value="Prof.">Prof.</option>
+                          <option value="Mr.">Mr.</option>
+                          <option value="Ms.">Ms.</option>
+                      </select>
+                  </div>
+                  
+                  <div class="col-md-12"><label class="labels">Mobile Number</label>
+                      <input type="text" [(ngModel)]="MobileNumber" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Enter Mobile Number" value="" required maxlength="10">
+                  </div>
+                  <div class="col-md-12"><label class="labels">NIC</label>
+                      <input type="text" [(ngModel)]="NIC" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Enter NIC" value="" required maxlength="12">
+                  </div>
+                  <div class="col-md-12"><label class="labels">Address Line 1</label>
+                      <input type="text" [(ngModel)]="AddressLine1" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Enter Address Line 1" value="">
+                  </div>
+                  <div class="col-md-12"><label class="labels">Address Line 2</label>
+                      <input type="text" [(ngModel)]="AddressLine2" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Enter Address Line 2" value="">
+                  </div>
+                  <div class="col-md-12"><label class="labels">State</label>
+                      <input type="text" [(ngModel)]="State" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Enter State" value="">
+                  </div>
+                  <div class="col-md-12"><label class="labels">Email</label>
+                      <input type="text" [(ngModel)]="Email" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Enter Email Address" value="">
+                  </div>
+              </div>
+
+              
+
+          </div>
+      </div>
+      <div class="col-md-4">
+          <div class="p-3 py-5">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h4 class="text-right">Bank Details</h4>
+              </div>
+              <div class="col-md-12">
+                <label class="labels">Salary Type</label>
+                <select id="title" name="title" [(ngModel)]="SalaryType">
+                  <option value="Monthly payment">Monthly payment</option>
+                  <option value="Rate Per Hour">Rate Per Hour</option>
+                </select>
+              </div> <br>
+      
+              <!-- Monthly Payment input box -->
+              <div class="row mt-3" *ngIf="SalaryType === 'Monthly payment'">
+                <div class="col-md-12">
+                  <label class="labels">Monthly Payment</label>
+                  <input type="text" [(ngModel)]="MonthlyPayment" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Enter Monthly Payment" value="">
+                </div>
+              </div>
+      
+              <!-- Rate Per Hour input box -->
+              <div class="row mt-3" *ngIf="SalaryType === 'Rate Per Hour'">
+                <div class="col-md-12">
+                  <label class="labels">Rate Per Hour</label>
+                  <input type="text" [(ngModel)]="RatePerHour" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Enter Rate Per Hour" value="">
+                </div>
+              </div>
+
+              <div class="col-md-12"><label class="labels">Account Name</label>
+                <input type="text" [(ngModel)]="AccountName" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Enter Account Name" value="">
+            </div> <br>
+            <div class="col-md-12"><label class="labels">Account Number</label>
+                <input type="text" [(ngModel)]="AccountNumber" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Enter Account Number" value="">
+            </div><br>
+
+              <div class="col-md-12"><label class="labels">Bank</label>
+                 <select id="title" name="title" [(ngModel)]="BankName" (change)="onBankSelectionChange()">
+                    <option value="Alliance Finance Company PLC">Alliance Finance Company PLC</option>
+                    <option value="Amana Bank PLC">Amana Bank PLC</option>
+                    <option value="Axis Bank">Axis Bank</option>
+                    <option value="Bank of Ceylon">Bank of Ceylon</option>
+                    <option value="Cargills Bank Limited">Cargills Bank Limited</option>
+                    <option value="Central Bank of Sri Lanka">Central Bank of Sri Lanka</option>
+                    <option value="Central Finance PLC">Central Finance PLC</option>
+                    <option value="Citi Bank">Citi Bank</option>
+                    <option value="Citizen Development Business Finance PLC">Citizen Development Business Finance PLC</option>
+                    <option value="Commercial Bank PLC">Commercial Bank PLC</option>
+                    <option value="Commercial Credit & Finance PLC">Commercial Credit & Finance PLC</option>
+                    <option value="Commercial Leasing and Finance">Commercial Leasing and Finance</option>
+                    <option value="Deutsche Bank">Deutsche Bank</option>
+                    <option value="DFCC Bank PLC">DFCC Bank PLC</option>
+                    <option value="Habib Bank Ltd">Habib Bank Ltd</option>
+                    <option value="Hatton National Bank PLC">Hatton National Bank PLC</option>
+                    <option value="HDFC Bank">HDFC Bank</option>
+                    <option value="Hongkong Shanghai Bank">Hongkong Shanghai Bank</option>
+                    <option value="ICICI Bank Ltd">ICICI Bank Ltd</option>
+                    <option value="Indian Bank">Indian Bank</option>
+                    <option value="Indian Overseas Bank">Indian Overseas Bank</option>
+                    <option value="Kanrich Finance Limited">Kanrich Finance Limited</option>
+                    <option value="Lanka Orix Finance PLC">Lanka Orix Finance PLC</option>
+                    <option value="LB Finance PLC">LB Finance PLC</option>
+                    <option value="MCB Bank Ltd">MCB Bank Ltd</option>
+                    <option value="Mercantile Investment and Finance PLC">Mercantile Investment and Finance PLC</option>
+                    <option value="Merchant Bank of Sri Lanka & Finance PLC">Merchant Bank of Sri Lanka & Finance PLC</option>
+                    <option value="National Development Bank PLC">National Development Bank PLC</option>
+                    <option value="National Savings Bank">National Savings Bank</option>
+                    <option value="Nations Trust Bank PLC">Nations Trust Bank PLC</option>
+                    <option value="Pan Asia Banking Corporation PLC">Pan Asia Banking Corporation PLC</option>
+                    <option value="Peoples Bank">Peoples Bank</option>
+                    <option value="People’s Leasing & Finance PLC">People’s Leasing & Finance PLC</option>
+                    <option value="Public Bank">Public Bank</option>
+                    <option value="Regional Development Bank">Regional Development Bank</option>
+                    <option value="Sampath Bank PLC">Sampath Bank PLC</option>
+                    <option value="Sanasa Development Bank">Sanasa Development Bank</option>
+                    <option value="Senkadagala Finance PLC">Senkadagala Finance PLC</option>
+                    <option value="Seylan Bank PLC">Seylan Bank PLC</option>
+                    <option value="Standard Chartered Bank">Standard Chartered Bank</option>
+                    <option value="State Bank of India">State Bank of India</option>
+                    <option value="State Mortgage & Investment Bank">State Mortgage & Investment Bank</option>
+                    <option value="Union Bank of Colombo PLC">Union Bank of Colombo PLC</option>
+                </select>
+                
+              </div> <br>
+              <div class="col-md-12">
+                <label class="labels">Bank Code</label>
+                <input type="text" class="form-control" placeholder="Bank Code" [(ngModel)]="bankCode" readonly>
+            </div> <br>
+            <div class="col-md-12"><label class="labels">Branch Name</label>
+                <input type="text" [(ngModel)]="BranchName" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Branch Name" value="">
+            </div><br>
+            <div class="col-md-12"><label class="labels">Branch Code</label>
+                <input type="text" [(ngModel)]="BranchCode" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Branch Code" value="">
+            </div> <br>
+          </div>
+      </div>
+  </div>
+  <!-- <div>
+      <button class="delete-button">Delete Profile</button>
+  </div> -->
+
+  <div class="mt-5 text-center"><button (click)="save()" class="btn btn-primary profile-button" type="button">Save Profile<i class="zmdi zmdi-arrow-right"></i></button></div> 
+  
+</div>

@@ -1,0 +1,51 @@
+/* Add the following CSS to your stylesheet or in a <style> tag in your HTML */
+
+body {
+    background-color: #f8f9fa; /* Light grayish background color */
+}
+
+.back-button {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	padding: 10px 20px;
+	background-color: #0074D9;
+	color: #fff;
+	text-decoration: none;
+	border-radius: 5px;
+	transition: background-color 0.3s;
+  }
+  
+  .back-button:hover {
+	background-color: #0056b3;
+  }
+  
+.container {
+    background-color: #f7f9fc; /* White background color for containers */
+    border-radius: 10px; /* Optional: Add rounded corners to containers */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle box shadow to containers */
+    padding: 20px; /* Optional: Add padding to containers */
+}
+
+table {
+    background-color: #c0d5f5; /* White background color for tables */
+    border-radius: 10px; /* Optional: Add rounded corners to tables */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle box shadow to tables */
+}
+
+/* Optional: Style the table header */
+.table thead th {
+    background-color: #5d5d5d; 
+    color: #fff;/* Light gray background color for table header */
+}
+
+/* Optional: Style the table rows on hover */
+.table tbody tr:hover {
+    background-color: #f5f5f5; /* Light gray background color on hover */
+}
+
+th, td {
+	border: 1px solid #949393;
+	padding: 8px;
+	text-align: center;
+  }

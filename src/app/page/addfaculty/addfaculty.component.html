@@ -1,0 +1,40 @@
+<a class="back-button" routerLink="/admin_dashboard">Back</a>
+
+<div class="container">
+  <h1><b>Add New Faculty</b></h1>
+  
+  <!-- Form to add new faculty -->
+  <form id="addFacultyForm" (ngSubmit)="save()">
+    <label for="facultyName"><b>Faculty Name:</b></label>
+    <input type="text" [(ngModel)]="facultyName" id="facultyName" name="facultyName" required>
+
+    <!-- Input for multiple departments -->
+    <label for="departmentNames"><b>Department Names:</b></label>
+    <input type="text" [(ngModel)]="departmentName" id="departmentNames" name="departmentNames" required>
+  
+    <button type="submit">Add</button>
+  </form>
+  
+  <!-- Table to view current faculty -->
+  <h2>Current Faculty</h2>
+  <table id="facultyTable">
+    <thead>
+      <tr>
+        <th>Faculty Name</th>
+        <th>Department Names</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let faculty of facultyArray">
+        <td>{{ faculty.FacultyName }}</td>
+        <td>
+          <span *ngFor="let department of faculty.DepartmentName; let last = last">
+            {{ department }}<br>{{ last ? '' : '' }}
+          </span>
+          <button (click)="addDepartment(faculty)">Update</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
