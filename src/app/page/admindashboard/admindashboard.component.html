@@ -81,7 +81,8 @@
                 <!-- Use Angular *ngFor directive to iterate through LecturerArray -->
                 <span *ngFor="let lecturer of LecturerArray">
                     <div class="lecturer-item">
-                        <span class="lecturer-name">{{ lecturer.Title }} {{ lecturer.LecturerName }}</span>
+                        
+                        <span class="lecturer-name" [routerLink]="['/lecprofile', lecturer.LecturerName]">{{ lecturer.Title }} {{ lecturer.LecturerName }}</span>
                         <!-- Edit button -->
                         <button class="lecview-button" (click)="editLecturer(lecturer)">Edit</button>
                     </div>

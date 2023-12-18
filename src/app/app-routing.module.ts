@@ -31,7 +31,7 @@ const routes: Routes = [
   {path:'co-registration',component:CoRegistrationComponent},
   {path:'codashboard',component:CodashboardComponent},
   {path:'lecregister',component:LecregistrationComponent},
-  {path:'lecprofile',component:LecprofileComponent},
+  {path:'lecprofile/:LecturerName',component:LecprofileComponent},
   {path:'editlecturer/:id',component:EditlecturerComponent},
   {path:'HOD-panal',component:HoddashboardComponent},
   {path:'add_modul',component:AddModuleComponent},
