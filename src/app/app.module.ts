@@ -47,7 +47,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AddfacultyComponent } from './page/addfaculty/addfaculty.component';
 import { LecturerDetailsComponent } from './lecturer-details/lecturer-details.component';
 
+// service 
 
+import { LecturerService } from 'src/app/lecturer.service';
 
 
 
@@ -104,7 +106,7 @@ import { LecturerDetailsComponent } from './lecturer-details/lecturer-details.co
     MatSnackBarModule,
  
   ],
-  providers: [],
+  providers: [LecturerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

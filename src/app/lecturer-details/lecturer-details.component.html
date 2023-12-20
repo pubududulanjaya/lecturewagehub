@@ -1,22 +1,83 @@
+<!-- lecturer-details.component.html -->
+
 <div>
   <h2>Lecturer Details</h2>
-  <div>
-    <p><strong>Lecturer Name:</strong> {{ lecturer.LecturerName }}</p>
-    <p><strong>Title:</strong> {{ lecturer.Title }}</p>
-    <p><strong>Mobile Number:</strong> {{ lecturer.MobileNumber }}</p>
-    <p><strong>NIC:</strong> {{ lecturer.NIC }}</p>
-    <p><strong>Address:</strong> {{ lecturer.AddressLine1 }}, {{ lecturer.AddressLine2 }}, {{ lecturer.State }}</p>
-    <p><strong>Email:</strong> {{ lecturer.Email }}</p>
-    <p><strong>Salary Type:</strong> {{ lecturer.SalaryType }}</p>
-    <p *ngIf="lecturer.SalaryType === 'Monthly payment'"><strong>Monthly Payment:</strong> {{ lecturer.MonthlyPayment }}</p>
-    <p><strong>Bank Details:</strong></p>
-    <ul>
-      <li><strong>Account Name:</strong> {{ lecturer.AccountName }}</li>
-      <li><strong>Account Number:</strong> {{ lecturer.AccountNumber }}</li>
-      <li><strong>Bank Name:</strong> {{ lecturer.BankName }}</li>
-      <li><strong>Bank Code:</strong> {{ lecturer.bankCode }}</li>
-      <li><strong>Branch Name:</strong> {{ lecturer.BranchName }}</li>
-      <li><strong>Branch Code:</strong> {{ lecturer.BranchCode }}</li>
-    </ul>
-  </div>
+ <!-- lecturer-details.component.html -->
+
+<div *ngIf="lecturerDetails">
+  <h2>{{ lecturerDetails.LecturerName }}</h2>
+  <p>Module Name: {{ lecturerDetails.ModuleName }}</p>
+  <p>Hours: {{ lecturerDetails.Hours }}</p>
+  <!-- Add other properties as needed -->
 </div>
+
+  
+  <!-- <div>
+    <label for="LecturerName">Lecturer Name:</label>
+    <span>{{ lecturerDetails.LecturerName }}</span>
+  </div>
+  <div>
+    <label for="Title">Title:</label>
+    <span>{{ lecturerDetails.Title }}</span>
+  </div>
+  <div>
+    <label for="MobileNumber">Mobile Number:</label>
+    <span>{{ lecturerDetails.MobileNumber }}</span>
+  </div>
+  <div>
+    <label for="NIC">NIC:</label>
+    <span>{{ lecturerDetails.NIC }}</span>
+  </div>
+  <div>
+    <label for="AddressLine1">Address Line 1:</label>
+    <span>{{ lecturerDetails.AddressLine1 }}</span>
+  </div>
+  <div>
+    <label for="AddressLine2">Address Line 2:</label>
+    <span>{{ lecturerDetails.AddressLine2 }}</span>
+  </div>
+  <div>
+    <label for="State">State:</label>
+    <span>{{ lecturerDetails.State }}</span>
+  </div>
+  <div>
+    <label for="Email">Email:</label>
+    <span>{{ lecturerDetails.Email }}</span>
+  </div>
+  <div>
+    <label for="SalaryType">Salary Type:</label>
+    <span>{{ lecturerDetails.SalaryType }}</span>
+  </div>
+  <div *ngIf="lecturerDetails.SalaryType === 'monthly'">
+    <label for="MonthlyPayment">Monthly Payment:</label>
+    <span>{{ lecturerDetails.MonthlyPayment }}</span>
+  </div>
+  <div *ngIf="lecturerDetails.SalaryType === 'hourly'">
+    <label for="RatePerHour">Rate Per Hour:</label>
+    <span>{{ lecturerDetails.RatePerHour }}</span>
+  </div>
+  <div>
+    <label for="AccountName">Account Name:</label>
+    <span>{{ lecturerDetails.AccountName }}</span>
+  </div>
+  <div>
+    <label for="AccountNumber">Account Number:</label>
+    <span>{{ lecturerDetails.AccountNumber }}</span>
+  </div>
+  <div>
+    <label for="BankName">Bank Name:</label>
+    <span>{{ lecturerDetails.BankName }}</span>
+  </div>
+  <div>
+    <label for="bankCode">Bank Code:</label>
+    <span>{{ lecturerDetails.bankCode }}</span>
+  </div>
+  <div>
+    <label for="BranchName">Branch Name:</label>
+    <span>{{ lecturerDetails.BranchName }}</span>
+  </div>
+  <div>
+    <label for="BranchCode">Branch Code:</label>
+    <span>{{ lecturerDetails.BranchCode }}</span>
+  </div>
+</div> -->

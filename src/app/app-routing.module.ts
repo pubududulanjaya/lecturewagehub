@@ -32,7 +32,7 @@ const routes: Routes = [
   {path:'codashboard',component:CodashboardComponent},
   {path:'lecregister',component:LecregistrationComponent},
   {path:'lecprofile/:LecturerName',component:LecprofileComponent},
-  {path:'editlecturer/:id',component:EditlecturerComponent},
+  {path:'editlecturer/:LecturerName',component:EditlecturerComponent},
   {path:'HOD-panal',component:HoddashboardComponent},
   {path:'add_modul',component:AddModuleComponent},
   {path:'add_batch',component:AddBatchComponent},

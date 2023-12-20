@@ -25,4 +25,9 @@ export class LecturerviewService {
   getSelectedLecturer(): any {
     return this.selectedLecturer;
   }
+  
+  getLecturerDetails(lecturerId: string): Observable<any> {
+    const url = `${this.apiUrl}/lectureDetails/${lecturerId}`;
+    return this.http.get(url);
+  }
 }
