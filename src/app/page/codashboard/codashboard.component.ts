@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { LecturerviewService } from 'src/app/lecturerview.service';
-import { LecturerService } from 'src/app/lecturer.service';
+
 
 @Component({
   selector: 'app-codashboard',
@@ -20,7 +20,7 @@ export class CodashboardComponent implements OnInit {
     private http: HttpClient,
     private router: Router,
     private lecturerviewService: LecturerviewService,
-    private lecturerService: LecturerService
+    
   ) {}
 
   ngOnInit() {
@@ -36,7 +36,7 @@ export class CodashboardComponent implements OnInit {
   }
 
   editLecturer(lecturer: any) {
-    this.lecturerService.getLecturerDetails(lecturer.LecturerName.toString()).subscribe(
+    this.lecturerviewService.getLecturerDetails(lecturer.LecturerName.toString()).subscribe(
       (data) => {
         this.router.navigate(['/editlecturer', lecturer.LecturerName], { state: { lecturer: data } });
       },

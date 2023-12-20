@@ -1,55 +1,49 @@
-import { Component, OnInit  } from '@angular/core';
+// lecturer-details.component.ts
+
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { LecturerService } from 'src/app/lecturer.service'; // Adjust the path based on your project structure
 
 @Component({
   selector: 'app-lecturer-details',
   templateUrl: './lecturer-details.component.html',
   styleUrls: ['./lecturer-details.component.css']
 })
-export class LecturerDetailsComponent implements OnInit{
-  lecturer: any; // Assume that you receive the lecturer data as an input
+export class LecturerDetailsComponent implements OnInit {
 
+  lecturerDetails: any = {};  // Replace 'any' with the interface or type of your lecturer details
 
-  lecturerId: number = 1; // Initialize it based on your requirements
-  LecturerName: string = '';
-  Title: string = '';
-  MobileNumber: string = '';
-  NIC: string = '';
-  AddressLine1: string = '';
-  AddressLine2: string = '';
-  State: string = '';
-  Email: string = '';
-  SalaryType: string = '';
-  MonthlyPayment: string = '';
-  RatePerHour: string = '';
-  AccountName: string = '';
-  AccountNumber: string = '';
-  BankName: string = '';
-  bankCode: string = '';
-  BranchName: string = '';
-  BranchCode: string = '';
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private lecturerService: LecturerService
+  ) { }
 
   ngOnInit(): void {
-    // You need to set the lecturer data from your API response or wherever you get it
-    this.lecturer = {
-      "_id": { "$oid": "656439fa8d926d4dc5bf06f9" },
-      "LecturerName": this.LecturerName,
-      "Title": "Prof.",
-      "MobileNumber": this.MobileNumber,
-      "NIC": "20000135268",
-      "AddressLine1": "Malabe, Kaduwela",
-      "AddressLine 2": "Malabe",
-      "State": "malabe",
-      "Email": "pubududulla@gmail.com",
-      "SalaryType": "Monthly payment",
-      "MonthlyPayment": "1784",
-      "AccountName": "pubuduajdabkjd",
-      "AccountNumber": "000000087",
-      "BankName": "Hatton National Bank PLC",
-      "bankCode": "7083",
-      "BranchName": "malabe",
-      "BranchCode": "12345",
-      "__v": 0
-    };
+    // Fetch lecturer details using the route parameters
+    this.route.paramMap.subscribe(params => {
+        const lecturerName = params.get('lecturerName');
+
+        // Check if lecturerName is not null before calling the service
+        if (lecturerName !== null) {
+            // Call the service to fetch lecturer details
+            this.lecturerService.getLecturerDetails(lecturerName).subscribe(
+                (details) => {
+                    console.log('Lecturer Details:', details);
+                    this.lecturerDetails = details;
+                },
+                (error) => {
+                    console.error('Error fetching lecturer details:', error);
+                }
+            );
+        }
+    });
+
+
+    // Add console logs here to log information about the lecturer data
+    console.log('Lecturer data:', this.lecturerDetails);
+    console.log('Is lecturerDetails defined?', this.lecturerDetails !== undefined);
   }
+  
+
+  // You can add additional methods or logic here based on your requirements
 }
