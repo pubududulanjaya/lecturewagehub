@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class CoordinatorService {
   private apiUrl = 'http://localhost:8000/user/create';
-  
+  private loginApiUrl = 'http://localhost:8000/login/create';
 
   constructor(private http: HttpClient) {}
 

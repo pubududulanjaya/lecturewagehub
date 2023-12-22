@@ -127,3 +127,22 @@ input[type="submit"]:hover{
 .back-button:hover {
     background-color: #0056b3;
 }
+
+
+
+/* login.component.css */
+/* .center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+form {
+  text-align: center;
+} */
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+}

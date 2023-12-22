@@ -17,13 +17,12 @@
   </form>
 
   <!-- Add a dialog for updating department -->
-  <div *ngIf="dialogOpen">
+  <!-- <mat-dialog-content *ngIf="dialogOpen">
     <h3>Add Department</h3>
     <input type="text" [(ngModel)]="newDepartment" placeholder="New Department">
     <button (click)="saveDepartment()">Save</button>
     <button (click)="closeDialog()">Cancel</button>
-  </div>
-</div>
+  </mat-dialog-content> -->
   
   <!-- Table to view current faculty -->
   <h2>Current Faculty</h2>
@@ -43,6 +42,12 @@
             {{ department }}<br>{{ last ? '' : '' }}
           </span>
           <button (click)="openDialog(faculty)">Update</button>
+          <mat-dialog-content *ngIf="dialogOpen">
+            <h3>Add Department</h3>
+            <input type="text" [(ngModel)]="newDepartment" placeholder="New Department">
+            <button (click)="saveDepartment()">Save</button>
+            <button (click)="closeDialog()">Cancel</button>
+          </mat-dialog-content>
         </td>
       </tr>
     </tbody>

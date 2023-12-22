@@ -55,6 +55,11 @@ import { LecturerDetailsComponent } from './lecturer-details/lecturer-details.co
 import { LecturerService } from 'src/app/lecturer.service';
 
 
+// dialog
+
+
+
+
 
 @NgModule({
   declarations: [
@@ -82,7 +87,8 @@ import { LecturerService } from 'src/app/lecturer.service';
     RateHistoryComponent,
 
     AddfacultyComponent,
-     LecturerDetailsComponent,
+    LecturerDetailsComponent,
+
     
   
   
