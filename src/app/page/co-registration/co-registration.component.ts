@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { CoordinatorService } from 'src/app/coordinator.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import {LoginService} from 'src/app/login.service';
 
 @Component({
   selector: 'app-co-registration',
@@ -29,7 +30,8 @@ export class CoRegistrationComponent implements OnInit {
   constructor(
     private coordinatorService: CoordinatorService,
     private snackBar: MatSnackBar,
-    private http: HttpClient
+    private http: HttpClient,
+    private loginService: LoginService
   ) {}
 
   ngOnInit() {
@@ -78,14 +80,26 @@ export class CoRegistrationComponent implements OnInit {
       UserType: this.UserType,
     };
 
+    const loginData = {
+      username: coordinatorData.UserName,
+      password: coordinatorData.Password,
+      usertype: coordinatorData.UserType,
+    };
+
     this.coordinatorService.addCoordinator(coordinatorData)
-      .subscribe((response: any) => {
-        if (response.status === true) {
-          this.showSnackBar('Coordinator added successfully');
-        } else {
-          this.showSnackBar('Failed to add coordinator: ' + response.message);
-        }
-      });
+    .subscribe((response: any) => {
+      if (response.status === true) {
+        this.loginService.saveLogin(loginData).subscribe((loginResponse: any) => {
+          if (loginResponse.success) {
+            this.showSnackBar('Coordinator added successfully');
+          } else {
+            this.showSnackBar('Failed to save login information: ' + loginResponse.message);
+          }
+        });
+      } else {
+        this.showSnackBar('Failed to add coordinator: ' + response.message);
+      }
+    });
   }
   private validateEmail(email: string): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

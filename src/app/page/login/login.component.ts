@@ -28,7 +28,7 @@ export class LoginComponent {
           // Navigate based on usertype
           if (response.usertype === 'coordinator') {
             this.router.navigate(['/codashboard']);
-          } else if (response.usertype === 'HOD') {
+          } else if (response.usertype === 'hod') {
             this.router.navigate(['/HOD-panal']);
           } else if(response.usertype === 'admin') {
             

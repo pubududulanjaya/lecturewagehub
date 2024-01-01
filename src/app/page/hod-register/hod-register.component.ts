@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HodService } from 'src/app/hod.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpClient } from '@angular/common/http';
+import {LoginService} from 'src/app/login.service';
 
 @Component({
   selector: 'app-hod-register',
@@ -22,7 +23,7 @@ export class HodRegisterComponent {
   Password: string = '';
   UserType:string='hod';
 
-  constructor(private hodService: HodService,private snackBar: MatSnackBar, private http: HttpClient) {}
+  constructor(private hodService: HodService,private snackBar: MatSnackBar, private http: HttpClient,private loginService: LoginService) {}
 
   ngOnInit() {
     this.getAllFaculties();
@@ -72,13 +73,25 @@ export class HodRegisterComponent {
       UserType:this.UserType
     };
 
+    const loginData = {
+      username: hodData.UserName,
+      password: hodData.Password,
+      usertype: hodData.UserType,
+    };
+
     
    this.hodService.addhod(hodData)
       .subscribe((response: any) => {
         if (response.status === true) {
-          alert('HOD added successfully'); // Show a simple alert
+          this.loginService.saveLogin(loginData).subscribe((loginResponse: any) => {
+            if (loginResponse.success) {
+              this.showSnackBar('HOD added successfully');
+            } else {
+              this.showSnackBar('Failed to save login information: ' + loginResponse.message);
+            }
+          });
         } else {
-          alert('Failed to add HOD: ' + response.message); // Show an alert with an error message
+          this.showSnackBar('Failed to add coordinator: ' + response.message);
         }
       });
   }
