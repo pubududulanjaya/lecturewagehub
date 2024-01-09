@@ -1,4 +1,5 @@
 // addfaculty.component.ts
+
 import { Component, OnInit } from '@angular/core';
 import { AddfacultyService } from 'src/app/addfaculty.service';
 import { HttpClient } from '@angular/common/http';
@@ -98,7 +99,7 @@ export class AddfacultyComponent implements OnInit {
 
   openDialog(faculty: any): void {
     this.selectedFaculty = faculty;
-    this.dialogOpen = true;
+this.dialogOpen = true;
   }
 
   saveDepartment(): void {

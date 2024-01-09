@@ -17,5 +17,7 @@ export class LecprofileComponent implements OnInit {
     // Use square brackets to access the property
     this.LecturerName = this.route.snapshot.params['LecturerName'];
     this.Title = this.route.snapshot.params['Title'];
+
+    console.log('Title:', this.Title); // Add this line to check the value
   }
 }

@@ -1,4 +1,48 @@
-<a class="back-button" routerLink="/admin_dashboard">Back</a>
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+ </head>
+
+<body class="navbody">
+  <!-- <input type="checkbox" id="check">
+  <label for="check">
+      <i class="fas fa-bars" id="btn"></i>
+      <i class="fas fa-times" id="cancel"></i>
+  </label> -->
+  <div class="sidebar">
+      <header>Menu</header>
+      <a routerLink="/admin_dashboard"> 
+      <i class="fas fa-qrcode"></i>
+      <span>Dashboard</span>
+      </a>
+      <a routerLink="/co-registration"> 
+      <i class="far fa-caret-square-right"></i>
+      <span>Coordinator Register</span>
+      </a>
+  <a routerLink="/hod-register"> 
+      <i class="far fa-caret-square-right"></i>
+      <span>HOD Register</span>
+      </a>
+      <a routerLink="/department_detail"> 
+      <i class="far fa-caret-square-right"></i>
+      <span>Department Details</span>
+      </a>
+  <a routerLink="/add_other_payment">
+      <i class="far fa-caret-square-right"></i>
+      <span>Add Other Payment</span>
+      </a>
+  <a routerLink="/salary_report">
+      <i class="far fa-caret-square-right"></i>
+      <span>salary report generator</span>
+      </a>
+
+      <a routerLink="/addfaculty">
+          <i class="far fa-caret-square-right"></i>
+           <span>Add Faculty</span>
+         </a>
+
+  </div>
+</body>
 
 <body>
   
@@ -16,7 +60,9 @@
   
       <label for="totalSalary">Total Payments:</label>
       <input type="text" [(ngModel)]="TotalPayments" [ngModelOptions]="{standalone: true}" id="totalSalary" name="totalSalary" placeholder="Enter total Payments">
+      <br>
   
       <button (click)="save()">Submit <i class="zmdi zmdi-arrow-right"></i></button>
     </form>
+    
   </body>

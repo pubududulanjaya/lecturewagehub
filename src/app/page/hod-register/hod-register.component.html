@@ -1,59 +1,111 @@
-<a class="back-button" routerLink="/admin_dashboard">Back</a>
-  <div class="wrapper" style="background-image: url('assets/images/cinec-login.png');">
-    <div class="inner">
-      <!-- <div class="image-holder">
-        <img src="assets/images/abc.jpg" alt="">
-      </div> -->
-      <form action="">
-        <h3>HOD Registration Form</h3><br>
-        <!-- <div class="form-wrapper">
-          <label for="user-type">User Type</label><br>
-          <select id="user-type" class="form-control">
-            <option value="Coordinator">Coordinator</option>
-            <option value="HOD">HOD</option>
-          </select>
-        </div> -->
+<body>
+  <head>
+      <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+   <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+     </head>
+     
+     <body class="navbody">
+      <!-- <input type="checkbox" id="check">
+      <label for="check">
+          <i class="fas fa-bars" id="btn"></i>
+          <i class="fas fa-times" id="cancel"></i>
+      </label> -->
+      <div class="sidebar">
+          <header>Menu</header>
+          <a routerLink="/admin_dashboard"> 
+          <i class="fas fa-qrcode"></i>
+          <span>Dashboard</span>
+          </a>
+          <a routerLink="/co-registration"> 
+          <i class="far fa-caret-square-right"></i>
+          <span>Coordinator Register</span>
+          </a>
+      <a routerLink="/hod-register"> 
+          <i class="far fa-caret-square-right"></i>
+          <span>HOD Register</span>
+          </a>
+          <a routerLink="/department_detail"> 
+          <i class="far fa-caret-square-right"></i>
+          <span>Department Details</span>
+          </a>
+      <a routerLink="/add_other_payment">
+          <i class="far fa-caret-square-right"></i>
+          <span>Add Other Payment</span>
+          </a>
+      <a routerLink="/salary_report">
+          <i class="far fa-caret-square-right"></i>
+          <span>salary report generator</span>
+          </a>
+
+          <a routerLink="/addfaculty">
+              <i class="far fa-caret-square-right"></i>
+               <span>Add Faculty</span>
+             </a>
+  
+      </div>
+  </body>
+
+
+<div class="wrapper">
+
+     <h3>HOD Registration Form</h3>
+     <form>
+       <div class="form-container">
+         <div class="form-field">
+          <label class="labels">Name:</label>
+          <input type="text" [(ngModel)]="HodName" [ngModelOptions]="{standalone: true}" placeholder="Name" class="form-control">
+          </div>
+
+          <div class="form-field">
+            <label for="Faculty">Select Faculty:</label>
+            <select id="Faculty" [(ngModel)]="selectedFaculty" name="lecturerSelect" required>
+              <option *ngFor="let faculty of FacultyArray" [value]="faculty.FacultyName">{{ faculty.FacultyName }}</option>
+            </select>
+             </div>
+           
+             <div class="form-wrapper" *ngIf="selectedFaculty">
+              <label for="Department">Select Department:</label>
+              <select id="Department" [(ngModel)]="Department" [ngModelOptions]="{ standalone: true }" required>
+                <option value="">Select Department</option>
+                <option *ngFor="let DepartmentName of getDepartmentsForFaculty(selectedFaculty)" [value]="DepartmentName">{{ DepartmentName }}</option>
+              </select>
+            </div>
+
+            <div class="form-wrapper" [ngClass]="{'error': !validateEmail(Email) && emailTouched}">
+              <label class="labels">Email Address:</label>
+              <input type="text" [(ngModel)]="Email" [ngModelOptions]="{standalone: true}" (blur)="emailTouched = true" placeholder="Email Address" class="form-control">
+              <i class="zmdi zmdi-email"></i>
+              <div *ngIf="!validateEmail(Email) && emailTouched" class="error-message">Please enter a valid email address</div>
+            </div>
+
+            <div class="form-wrapper"><label class="labels">UserName:</label>
+              <input type="text" [(ngModel)]="UserName" [ngModelOptions]="{standalone: true}" placeholder="Username" class="form-control">
+              <i class="zmdi zmdi-account"></i>
+            </div>
+
+            <div class="form-wrapper" [ngClass]="{'error': !validatePassword(Password) && passwordTouched}">
+              <label class="labels">Password:</label>
+              <input type="password" [(ngModel)]="Password" [ngModelOptions]="{standalone: true}" (blur)="passwordTouched = true" placeholder="Password" class="form-control">
+              <i class="zmdi zmdi-lock"></i>
+              <div *ngIf="!validatePassword(Password) && passwordTouched" class="error-message">Password must be at least 6 characters long</div>
+            </div>
         
-       
-        <div class="form-group">
-        <input type="text" [(ngModel)]="HodName" [ngModelOptions]="{standalone: true}" placeholder="Name" class="form-control">
-        </div>
-
-       <div class="form-wrapper">
-        <label for="Faculty">Select Faculty:</label>
-        <select id="Faculty" [(ngModel)]="selectedFaculty" name="lecturerSelect" required>
-          <option *ngFor="let faculty of FacultyArray" [value]="faculty.FacultyName">{{ faculty.FacultyName }}</option>
-        </select>
-      </div>
-
-      <!-- <div class="form-wrapper" *ngIf="selectedFaculty">
-        <label>Selected Faculty:</label>
-        <span>{{ selectedFaculty }}</span>
-      </div> -->
-
-      <div class="form-wrapper" *ngIf="selectedFaculty">
-        <label for="Department">Select Department:</label>
-        <select id="Department" [(ngModel)]="Department" [ngModelOptions]="{ standalone: true }" required>
-          <option value="">Select Department</option>
-          <option *ngFor="let DepartmentName of getDepartmentsForFaculty(selectedFaculty)" [value]="DepartmentName">{{ DepartmentName }}</option>
-        </select>
-      </div>
-
-        <div class="form-wrapper">
-          <input type="text"[(ngModel)]="Email" [ngModelOptions]="{standalone: true}"  placeholder="Email Address" class="form-control">
-          <i class="zmdi zmdi-email"></i>
-        </div>
-        <div class="form-wrapper">
-          <input type="text" [(ngModel)]="UserName" [ngModelOptions]="{standalone: true}" placeholder="Username" class="form-control">
-          <i class="zmdi zmdi-account"></i>
-        </div>
-        <div class="form-wrapper">
-          <input type="text"[(ngModel)]="Password" [ngModelOptions]="{standalone: true}" placeholder="Password" class="form-control">
-          <i class="zmdi zmdi-lock"></i>
-        </div>
-        <button (click)="save()">Register <i class="zmdi zmdi-arrow-right"></i></button>
-
+           <div class="bottom-buttons">
+               <button class="delete-button">Delete</button>
+               <button (click)="save()">Register <i class="zmdi zmdi-arrow-right"></i></button>
+           </div>
+       </div>
       </form>
-      
-    </div>
-  </div>
+      </div>
+
+ <script>
+  document.getElementById("myForm").addEventListener("submit", function (event) {
+      event.preventDefault(); // Prevents the default form submission
+
+      // You can add your logic here to handle the form submission
+      // For demonstration purposes, let's just refresh the form
+      document.getElementById("myForm").reset();
+  });
+</script>
+
+</body>

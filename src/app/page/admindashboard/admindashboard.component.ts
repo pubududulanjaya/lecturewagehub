@@ -9,7 +9,8 @@ import { LecturerviewService } from 'src/app/lecturerview.service';
 })
 export class AdmindashboardComponent {
   LecturerArray: any[] = [];
-  selectedLecturer: any; // Variable to store the selected lecturer for viewing details
+  selectedLecturer: any; 
+  searchInput: string = '';
 
   constructor(private http: HttpClient, private lecturerviewService: LecturerviewService) {}
 
@@ -35,5 +36,19 @@ export class AdmindashboardComponent {
     this.selectedLecturer = lecturer;
     this.lecturerviewService.setLecturer(this.selectedLecturer); // You can use a service to share data between components
   }
-}
 
+  searchLecturers() {
+    if (this.searchInput.trim() !== '') {
+      this.LecturerArray = this.LecturerArray.filter((lecturer) =>
+        lecturer.LecturerName.toLowerCase().includes(this.searchInput.toLowerCase())
+      );
+    } else {
+      this.getAllLecturers();
+    }
+  }
+
+  handleInputChange(event: any) {
+    this.searchInput = event.target.value;
+    this.searchLecturers();
+  }
+}

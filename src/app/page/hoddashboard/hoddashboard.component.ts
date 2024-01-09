@@ -1,29 +1,41 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { LecturerviewService } from 'src/app/lecturerview.service';
+import { AuthService } from 'src/app/auth.service';
 
 @Component({
   selector: 'app-hoddashboard',
   templateUrl: './hoddashboard.component.html',
-  styleUrls: ['./hoddashboard.component.css']
+  styleUrls: ['./hoddashboard.component.css'],
 })
 export class HoddashboardComponent implements OnInit {
   LecturerArray: any[] = [];
   ModuleData: any[] = [];
   selectedLecturer: any;
+  Department: string | null =null;
 
-  constructor(private http: HttpClient, private lecturerviewService: LecturerviewService) {}
+  constructor(
+    private http: HttpClient,
+    private lecturerviewService: LecturerviewService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
     console.log("Fetching lecturers...");
     this.getAllLecturers();
-
+  
     console.log("Fetching modules...");
     this.getAllModules();
-
-    // Add the action you want to perform after viewing all data
-    this.performAfterViewingAllData();
+  
+    // Fetch and set department name
+    const loggedInUser = this.authService.getLoggedInUser();
+    if (loggedInUser) {
+      this.Department = this.authService.getDepartmentForUser(loggedInUser);
+      console.log("Department Name:", this.Department);
+    }
+  
   }
+  
 
   getAllLecturers() {
     this.http.get("http://localhost:8000/lectureDetails/getAll")

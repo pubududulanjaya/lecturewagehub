@@ -1,10 +1,8 @@
-// co-registration.component.ts
-
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
 import { CoordinatorService } from 'src/app/coordinator.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { LoginService } from 'src/app/login.service';
 
 @Component({
   selector: 'app-co-registration',
@@ -12,12 +10,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./co-registration.component.css']
 })
 export class CoRegistrationComponent implements OnInit {
-
   FacultyArray: any[] = [];
   selectedFaculty: string = '';
   selectedFacultyName: string = '';
-  DepartmentNameArray: any[] = []; // Add an array to store departments
-
+  DepartmentNameArray: any[] = [];
   Co_Name: string = '';
   Faculty: string = '';
   Department: string = '';
@@ -26,10 +22,15 @@ export class CoRegistrationComponent implements OnInit {
   Password: string = '';
   UserType: string = 'coordinator';
 
+  // Add boolean flags for email and password validation
+  emailTouched: boolean = false;
+  passwordTouched: boolean = false;
+
   constructor(
     private coordinatorService: CoordinatorService,
     private snackBar: MatSnackBar,
-    private http: HttpClient
+    private http: HttpClient,
+    private loginService: LoginService
   ) {}
 
   ngOnInit() {
@@ -42,21 +43,23 @@ export class CoRegistrationComponent implements OnInit {
         console.log(resultData);
         this.FacultyArray = resultData.data;
         this.selectedFacultyName = this.getSelectedFacultyName();
-        this.initializeDepartments(); // Initialize departments when faculties are loaded
+        this.initializeDepartments();
       });
   }
+
   onFacultyChange() {
     this.initializeDepartments();
   }
 
   initializeDepartments() {
-    // Get departments based on the selected faculty
     this.DepartmentNameArray = this.getDepartmentsForFaculty(this.selectedFaculty);
   }
+
   getDepartmentsForFaculty(faculty: string): string[] {
     const selectedFacultyObject = this.FacultyArray.find(f => f.FacultyName === faculty);
     return selectedFacultyObject ? selectedFacultyObject.DepartmentName : [];
   }
+
   save() {
     if (!this.validateEmail(this.Email)) {
       this.showSnackBar('Please enter a valid email address');
@@ -78,21 +81,37 @@ export class CoRegistrationComponent implements OnInit {
       UserType: this.UserType,
     };
 
+    const loginData = {
+      username: coordinatorData.UserName,
+      password: coordinatorData.Password,
+      usertype: coordinatorData.UserType,
+      Department: coordinatorData.Department,
+    };
+
     this.coordinatorService.addCoordinator(coordinatorData)
       .subscribe((response: any) => {
         if (response.status === true) {
-          this.showSnackBar('Coordinator added successfully');
+          this.loginService.saveLogin(loginData).subscribe((loginResponse: any) => {
+            if (loginResponse.success) {
+              this.showSnackBar('Coordinator added successfully');
+            } else {
+              this.showSnackBar('Failed to save login information: ' + loginResponse.message);
+            }
+          });
         } else {
           this.showSnackBar('Failed to add coordinator: ' + response.message);
         }
       });
   }
-  private validateEmail(email: string): boolean {
+
+  // Change access modifier to public
+  validateEmail(email: string): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   }
 
-  private validatePassword(password: string): boolean {
+  // Change access modifier to public
+  validatePassword(password: string): boolean {
     return password.length >= 6;
   }
 

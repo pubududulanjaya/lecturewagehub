@@ -1,8 +1,9 @@
 <!-- addfaculty.component.html -->
 <a class="back-button" routerLink="/admin_dashboard">Back</a>
 
+<body>
 <div class="container">
-  <h1><b>Add New Faculty</b></h1>
+  <h2><b>Add New Faculty and Department</b></h2>
   
   <!-- Form to add new faculty -->
   <form id="addFacultyForm" (ngSubmit)="save()">
@@ -24,9 +25,11 @@
     <button (click)="closeDialog()">Cancel</button>
   </div>
 </div>
+
+</body>
   
   <!-- Table to view current faculty -->
-  <h2>Current Faculty</h2>
+  <h2>Current Faculty and Department</h2>
   <table id="facultyTable">
     <thead>
       <tr>

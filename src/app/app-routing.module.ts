@@ -40,7 +40,7 @@ const routes: Routes = [
   {path:'hod-register',component:HodRegisterComponent},
   {path:'admin_dashboard',component:AdmindashboardComponent},
   {path:'salary_report',component:SalaryReportComponent},
-  {path:'salary_Certificate',component:SalaryCertificateComponent},
+  {path:'salary_Certificate/:LecturerName',component:SalaryCertificateComponent},
   {path:'add_other_payment',component:OtherPaymentComponent},
   {path:'rate-history',component:RateHistoryComponent},
 
