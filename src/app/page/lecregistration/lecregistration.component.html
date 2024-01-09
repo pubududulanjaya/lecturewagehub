@@ -12,15 +12,38 @@
 <div class="container rounded bg-white mt-5 mb-5">
   <div class="row">
       <div class="col-md-3 border-right">
-          <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span><div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Upload Profile Image</button></div> </span></div>
+          <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+            <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+            <span>
+                <div class="mt-5 text-center">
+                    <label for="profile-image">Upload Image</label>
+                    <input type="file" id="profile-image" accept="image/*">
+                </div> 
+                <div class="form-group">
+                    <label for="cv">Upload CV</label>
+                    <input type="file" id="cv" accept=".pdf, .doc, .docx">
+                </div>
+            </span>
+            <!-- <span>
+                <div class="mt-5 text-center">
+                    <button class="btn btn-primary profile-button" type="button">Upload Profile Image</button>
+                </div> 
+            </span>
+
+            <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Upload cv</button></div> -->
+        </div>
+
           <div class="row mt-2">
             <div class="col-md-12">
                <label class="labels">Lecturer ID</label>
                <input type="text" [(ngModel)]="lecturerId" class="form-control" placeholder="Lecturer ID" disabled>
             </div>
          </div>
-          <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Upload cv</button></div>
+
+         
+
       </div>
+
       <div class="col-md-5 border-right">
           <div class="p-3 py-5">
               <div class="d-flex justify-content-between align-items-center mb-3">
@@ -63,7 +86,6 @@
                       <input type="text" [(ngModel)]="Email" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Enter Email Address" value="">
                   </div>
               </div>
-
               
 
           </div>

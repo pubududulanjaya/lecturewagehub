@@ -23,6 +23,10 @@ export class HodRegisterComponent {
   Password: string = '';
   UserType:string='hod';
 
+   // Add boolean flags for email and password validation
+   emailTouched: boolean = false;
+   passwordTouched: boolean = false;
+
   constructor(private hodService: HodService,private snackBar: MatSnackBar, private http: HttpClient,private loginService: LoginService) {}
 
   ngOnInit() {
@@ -77,6 +81,7 @@ export class HodRegisterComponent {
       username: hodData.UserName,
       password: hodData.Password,
       usertype: hodData.UserType,
+      Department:hodData.Department,
     };
 
     
@@ -96,12 +101,14 @@ export class HodRegisterComponent {
       });
   }
   
-  private validateEmail(email: string): boolean {
+  // Change access modifier to public
+  validateEmail(email: string): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   }
 
-  private validatePassword(password: string): boolean {
+  // Change access modifier to public
+  validatePassword(password: string): boolean {
     return password.length >= 6;
   }
 

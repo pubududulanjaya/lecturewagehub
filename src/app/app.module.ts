@@ -109,12 +109,12 @@ import { LecturerService } from 'src/app/lecturer.service';
     MatDatepickerModule,
     MatInputModule,
     MatFormFieldModule,
+    MatSnackBarModule,
+    MatDialogModule,
     BrowserAnimationsModule,
 
 
-    MatSnackBarModule,
-    MatDialogModule,
- 
+  
   ],
   providers: [LecturerService],
   bootstrap: [AppComponent]

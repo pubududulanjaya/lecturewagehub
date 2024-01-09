@@ -2,8 +2,8 @@
   
 </a>
 <body>
-    <h2>{{ Title }} {{ LecturerName }}</h2>
-    <h2>Lecturer Profile</h2>
+    <h2>{{ Title }} {{ LecturerName }} Profile</h2>
+   
     <div class="profile-container">
         <div class="photo-container">
             <img src="assets/images/cinec-lec.jpg" alt="Lecturer Photo" width="200" height="200">
@@ -18,7 +18,8 @@
         </div>
         <div class="bottom-buttons">
             <button class="Delete_profile-button">View Profile</button>
-            <button class="View_Salary_Report-button" routerLink="/salary_Certificate">View Certificate</button>
+            <button class="View_Salary_Report-button" [routerLink]="['/salary_Certificate', LecturerName]">View Certificate</button>
+
             <button class="View_Salary_Report-button" routerLink="/salary_Certificate">Tax Report</button>
             <button class="View_Salary_Report-button" routerLink="/rate-history" >Rate History</button>
         </div>

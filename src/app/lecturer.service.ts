@@ -1,46 +1,31 @@
 // lecturer.service.ts
-
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LecturerService {
+  private apiUrl = 'http://localhost:8000';
 
-  // Replace 'any' with the actual interface or type of your lecturer details
-  getLecturerDetails(lecturerName: string): Observable<any> {
-    // Assuming you have a method to fetch lecturer details from an API or other data source
-    // Replace the following line with your actual implementation
-    const lecturerDetails = this.fetchLecturerDetailsFromApi(lecturerName);
-    return of(lecturerDetails);
+  constructor(private http: HttpClient) {}
+
+  getLecturerDetails(LecturerName: string): Observable<any> {
+    const url = `${this.apiUrl}/lectureDetails/${LecturerName}`;
+    return this.http.get<any>(url).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error fetching lecturer details', error);
+        return throwError('An error occurred while fetching lecturer details');
+      })
+    );
   }
 
-  // Replace this with your actual method to fetch data from an API or other data source
-  private fetchLecturerDetailsFromApi(lecturerName: string): any {
-    // Example: Make an HTTP request or fetch data from a database
-    // Replace the following line with your actual implementation
-    const mockLecturerDetails = {
-      lecturerId: '123',
-      LecturerName: lecturerName,
-      Title: 'Associate Professor',
-      MobileNumber: '1234567890',
-      NIC: '123456789X',
-      AddressLine1: '123 Main Street',
-      AddressLine2: 'Apt 456',
-      State: 'Cityville',
-      Email: 'lecturer@example.com',
-      SalaryType: 'monthly',
-      MonthlyPayment: '5000',
-      RatePerHour: 'null',
-      AccountName: 'John Doe',
-      AccountNumber: '123456789012',
-      BankName: 'Bank of Cityville',
-      bankCode: 'B123',
-      BranchName: 'Cityville Branch',
-      BranchCode: 'C456'
-      // Add other details here
-    };
-    return mockLecturerDetails;
+  getLecturerDetailsByName(LecturerName: string): Observable<any> {
+    // This is a placeholder, replace it with your actual implementation
+    // You might want to modify this depending on how your API expects data
+    // For example, if your API expects a request body, you can use http.post instead of http.get
+    return this.http.get(`${this.apiUrl}/lecturers/${LecturerName}`);
   }
 }

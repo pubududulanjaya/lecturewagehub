@@ -1,8 +1,9 @@
 <!-- addfaculty.component.html -->
 <a class="back-button" routerLink="/admin_dashboard">Back</a>
 
+<body>
 <div class="container">
-  <h1><b>Add New Faculty</b></h1>
+  <h2><b>Add New Faculty and Department</b></h2>
   
   <!-- Form to add new faculty -->
   <form id="addFacultyForm" (ngSubmit)="save()">
@@ -17,15 +18,18 @@
   </form>
 
   <!-- Add a dialog for updating department -->
-  <!-- <mat-dialog-content *ngIf="dialogOpen">
+  <div *ngIf="dialogOpen">
     <h3>Add Department</h3>
     <input type="text" [(ngModel)]="newDepartment" placeholder="New Department">
     <button (click)="saveDepartment()">Save</button>
     <button (click)="closeDialog()">Cancel</button>
-  </mat-dialog-content> -->
+  </div>
+</div>
+
+</body>
   
   <!-- Table to view current faculty -->
-  <h2>Current Faculty</h2>
+  <h2>Current Faculty and Department</h2>
   <table id="facultyTable">
     <thead>
       <tr>
@@ -42,12 +46,6 @@
             {{ department }}<br>{{ last ? '' : '' }}
           </span>
           <button (click)="openDialog(faculty)">Update</button>
-          <mat-dialog-content *ngIf="dialogOpen">
-            <h3>Add Department</h3>
-            <input type="text" [(ngModel)]="newDepartment" placeholder="New Department">
-            <button (click)="saveDepartment()">Save</button>
-            <button (click)="closeDialog()">Cancel</button>
-          </mat-dialog-content>
         </td>
       </tr>
     </tbody>

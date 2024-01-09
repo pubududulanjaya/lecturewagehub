@@ -1,4 +1,3 @@
-
 <div class="logout-container">
     <span class="logout-icon" onclick="toggleDropdown">
         <img class="login-image" src="assets/images/user.png" alt="Login">
@@ -67,12 +66,17 @@
         <div class="logout-list_container">
             <h3>Lecturer Name List</h3>
             <div class="Lecturer_Name_List">
-                <div class="header">
-                    <div class="search-bar">
-                        <input type="text" class="search-input" placeholder="Search">
-                        <button class="search-button">Search</button>
-                    </div>
-                </div>    
+              <div class="header">
+                <div class="search-bar">
+                  <input
+                    type="text"
+                    class="search-input"
+                    [(ngModel)]="searchInput"
+                    (input)="handleInputChange($event)"
+                    placeholder="Search"/>
+                  <button class="search-button" (click)="searchLecturers()">Search</button>
+                </div>
+              </div>
             </div>
         </div>
 
@@ -97,6 +101,5 @@
             </div>
         </div>
     </div>
-   
-</body>
-</div>
+ 
+ </body>
