@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { BatchService } from 'src/app/batch.service';
 
 @Component({
@@ -6,26 +7,32 @@ import { BatchService } from 'src/app/batch.service';
   templateUrl: './add-batch.component.html',
   styleUrls: ['./add-batch.component.css']
 })
-export class AddBatchComponent {
-  DegreeName: string = ''; // Initialize the properties
+export class AddBatchComponent implements OnInit {
+  Department: string = '';
+  DegreeName: string = '';
   BatchNo: string = '';
-  
-  constructor(private batchService: BatchService) {}
+
+  constructor(private route: ActivatedRoute, private batchService: BatchService) {}
+
+  ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.Department = params['Department'];
+    });
+  }
 
   save() {
     const batchData = {
-     
-      DegreeName: this.DegreeName, // Access the properties here
-      BatchNo: this.BatchNo
+      DegreeName: this.DegreeName,
+      BatchNo: this.BatchNo,
+      Department: this.Department
     };
 
-    
-   this.batchService.addbatch(batchData)
+    this.batchService.addBatch(batchData)
       .subscribe((response: any) => {
         if (response.status === true) {
-          alert('Batch added successfully'); // Show a simple alert
+          alert('Batch added successfully');
         } else {
-          alert('Failed to add Batch: ' + response.message); // Show an alert with an error message
+          alert('Failed to add Batch: ' + response.message);
         }
       });
   }

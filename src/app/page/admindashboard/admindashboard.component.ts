@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { LecturerviewService } from 'src/app/lecturerview.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admindashboard',
@@ -12,7 +13,7 @@ export class AdmindashboardComponent {
   selectedLecturer: any; 
   searchInput: string = '';
 
-  constructor(private http: HttpClient, private lecturerviewService: LecturerviewService) {}
+  constructor(private http: HttpClient, private lecturerviewService: LecturerviewService,private router: Router) {}
 
   ngOnInit() {
     this.getAllLecturers();

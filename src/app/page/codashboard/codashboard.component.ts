@@ -2,6 +2,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { LecturerviewService } from 'src/app/lecturerview.service';
 
@@ -15,15 +16,21 @@ export class CodashboardComponent implements OnInit {
   LecturerArray: any[] = [];
   selectedLecturer: any;
   searchInput: string = '';
-
+  Department: string='';
+  
   constructor(
     private http: HttpClient,
     private router: Router,
     private lecturerviewService: LecturerviewService,
+    private route: ActivatedRoute,
     
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void{
+    this.route.params.subscribe(params => {
+      this.Department = params['Department'];
+    });
+  
     this.getAllLecturers();
   }
 
@@ -58,7 +65,7 @@ export class CodashboardComponent implements OnInit {
       );
     } else {
       this.getAllLecturers();
-    }
+    } 
   }
 
   handleInputChange(event: any) {

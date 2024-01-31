@@ -14,35 +14,44 @@ export class LoginComponent {
   errorMessage: string = '';
   successMessage: string = '';
 
-  constructor(private loginService: LoginService, private router: Router) {}
+  constructor(
+    private loginService: LoginService,
+    private router: Router
+  ) {}
 
   login() {
+    console.log('Attempting login...');
     const credentials = { username: this.username, password: this.password };
-  
+    console.log('Request Credentials:', credentials);
+
     this.loginService.login(credentials).subscribe(
       (response: any) => {
+        console.log('Login Response:', response);
+
         if (response.success) {
-          this.successMessage = response.message;
-          this.errorMessage = ''; // Clear any previous error message
-  
-          // Navigate based on usertype
-          if (response.usertype === 'coordinator') {
-            this.router.navigate(['/codashboard']);
+          console.log('Received usertype:', response.usertype);
+          console.log('Received Department:', response.Department);
+
+          // Navigate based on usertype and department
+          if (response.usertype === 'coordinator' && response.Department !== undefined) {
+            this.router.navigate([`/codashboard/${response.Department}`]);
           } else if (response.usertype === 'hod') {
             this.router.navigate(['/HOD-panal']);
-          } else if(response.usertype === 'admin') {
-            
+          } else if (response.usertype === 'admin') {
             this.router.navigate(['/admin_dashboard']);
+          } else {
+            this.errorMessage = 'Invalid usertype or department.';
+            console.error('Invalid usertype or department:', response.usertype, response.Department);
           }
         } else {
           this.errorMessage = response.message;
-          this.successMessage = ''; // Clear any previous success message
+          this.successMessage = '';
           console.error(response.message);
         }
       },
       (error) => {
         this.errorMessage = 'An error occurred. Please try again later.';
-        this.successMessage = ''; // Clear any previous success message
+        this.successMessage = '';
         console.error('An error occurred:', error);
       }
     );

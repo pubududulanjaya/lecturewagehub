@@ -6,8 +6,15 @@ body {
     padding: 0;
 }
 
+.no-payment-message {
+    color: rgb(97, 50, 50);
+    font-weight: bold;
+    margin-top: 20px;
+    font-size: 3.5vh
+  }
+  
 .profile-container {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 20px auto;
     background-color: #ffffff;
     border: 1px solid #dcdcdc;
@@ -31,6 +38,7 @@ body {
 
 .profile-details {
     text-align: left;
+    margin-right: 150px;
 }
 
 .profile-info {
@@ -60,9 +68,11 @@ body {
     color: #fff;
     border: none;
     border-radius: 5px;
-    padding: 10px 20px;
+    padding: 13px 25px;
     cursor: pointer;
     margin-bottom: 10px;
+    display: inline-block;
+    vertical-align: top;
 }
 
 h2 {
