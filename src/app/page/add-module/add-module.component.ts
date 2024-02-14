@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ModuleService } from 'src/app/module.service';
 import { LecturerviewService } from 'src/app/lecturerview.service';
 import { HttpClient } from '@angular/common/http';
+import { Router, ActivatedRoute } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service'; // Import CookieService
 
 @Component({
   selector: 'app-add-module',
@@ -10,8 +12,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AddModuleComponent implements OnInit {
   LecturerArray: any[] = [];
-  selectedLecturer: string = ''; // Update property name
-
+  selectedLecturer: string = '';
+  Department: string = '';
   ModuleName: string = '';
   ModuleCode: string = '';
   Hours: string = '';
@@ -20,11 +22,22 @@ export class AddModuleComponent implements OnInit {
     private http: HttpClient,
     private lecturerviewService: LecturerviewService,
     private moduleService: ModuleService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private cookieService: CookieService // Add CookieService to the constructor
   ) {}
 
   ngOnInit() {
+    this.Department = this.cookieService.get('Department');
+
+    this.route.params.subscribe(params => {
+      this.Department = params['Department'] || this.Department;
+    });
+
+  
     this.getAllLecturers();
   }
+  
 
   getAllLecturers() {
     this.http.get("http://localhost:8000/lectureDetails/getAll")
@@ -39,7 +52,8 @@ export class AddModuleComponent implements OnInit {
       ModuleName: this.ModuleName,
       ModuleCode: this.ModuleCode,
       LecturerName: this.selectedLecturer, // Update property name
-      Hours: this.Hours
+      Hours: this.Hours,
+      Department: this.Department,
     };
 
     this.moduleService.addmodule(moduleData)

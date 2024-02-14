@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BatchService } from 'src/app/batch.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-add-batch',
@@ -12,11 +13,13 @@ export class AddBatchComponent implements OnInit {
   DegreeName: string = '';
   BatchNo: string = '';
 
-  constructor(private route: ActivatedRoute, private batchService: BatchService) {}
+  constructor(private route: ActivatedRoute, private batchService: BatchService,private cookieService: CookieService ) {}
 
   ngOnInit(): void {
+    this.Department = this.cookieService.get('Department');
+
     this.route.params.subscribe(params => {
-      this.Department = params['Department'];
+      this.Department = params['Department'] || this.Department;
     });
   }
 
@@ -24,7 +27,7 @@ export class AddBatchComponent implements OnInit {
     const batchData = {
       DegreeName: this.DegreeName,
       BatchNo: this.BatchNo,
-      Department: this.Department
+      Department: this.Department,
     };
 
     this.batchService.addBatch(batchData)

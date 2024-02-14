@@ -26,19 +26,19 @@
                  <i class="fas fa-qrcode"></i>
                  <span>Dashboard</span>
                </a>
-               <a routerLink="/codashboard/:Department"> 
+               <a routerLink="/codashboard"> 
                 <i class="far fa-caret-square-right"></i>
                  <span>Lecturer Name List</span>
                </a>
-              <a routerLink="/add_modul/:Department"> 
+              <a routerLink="/add_modul"> 
                  <i class="far fa-caret-square-right"></i>
                  <span>Add New Module</span>
                </a>
-               <a routerLink="/add_batch/:Department"> 
+               <a routerLink="/add_batch"> 
                 <i class="far fa-caret-square-right"></i>
                  <span>Add New Batch</span>
                </a>
-              <a routerLink="/lecregister/:Department">
+              <a routerLink="/lecregister">
                 <i class="far fa-caret-square-right"></i>
                  <span>Add New Lecturer</span>
                </a>
@@ -49,6 +49,7 @@
 
     
     <div class="container">
+      <h3>{{ Department }} Coordinator Dashboard</h3>
         <div class="logout-list_container">
             <h3>Lecturer Name List</h3>
             <div class="Lecturer_Name_List">

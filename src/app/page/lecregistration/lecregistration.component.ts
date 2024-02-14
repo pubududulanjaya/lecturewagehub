@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { LecregistrationService } from 'src/app/lecregistration.service';
 import { FileUploader } from 'ng2-file-upload';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-lecregistration',
@@ -27,7 +29,23 @@ export class LecregistrationComponent {
   BranchName: string = '';
   BranchCode: string = '';
 
-  constructor(private lecregistrationService: LecregistrationService) {}
+  Department: string = '';
+  constructor(
+    private lecregistrationService: LecregistrationService,
+    private cookieService: CookieService,
+    private route: ActivatedRoute
+  ) {}
+
+
+  ngOnInit(): void {
+    // Set the Department based on the cookie value
+    this.Department = this.cookieService.get('Department');
+
+    // Subscribe to route parameters and update Department if provided
+    this.route.params.subscribe(params => {
+      this.Department = params['Department'] || this.Department;
+    });
+  }
 
   save() {
     // Increment the lecturer ID for the next profile
@@ -52,7 +70,9 @@ export class LecregistrationComponent {
       BankName: this.BankName,
       bankCode: this.bankCode,
       BranchName: this.BranchName,
-      BranchCode: this.BranchCode
+      BranchCode: this.BranchCode,
+
+      Department: this.Department,
     };
 
     // Call the service to add lecturer registration

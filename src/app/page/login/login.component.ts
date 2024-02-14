@@ -1,7 +1,8 @@
 // login.component.ts
 import { Component } from '@angular/core';
+import { Store } from '@ngxs/store';
 import { Router } from '@angular/router';
-import { LoginService } from 'src/app/login.service';
+import { Login, LoginFailure } from './login.state';
 
 @Component({
   selector: 'app-login',
@@ -11,49 +12,32 @@ import { LoginService } from 'src/app/login.service';
 export class LoginComponent {
   username: string = '';
   password: string = '';
-  errorMessage: string = '';
-  successMessage: string = '';
 
-  constructor(
-    private loginService: LoginService,
-    private router: Router
-  ) {}
+  constructor(private store: Store, private router: Router) {}
 
   login() {
     console.log('Attempting login...');
     const credentials = { username: this.username, password: this.password };
     console.log('Request Credentials:', credentials);
 
-    this.loginService.login(credentials).subscribe(
-      (response: any) => {
-        console.log('Login Response:', response);
-
-        if (response.success) {
-          console.log('Received usertype:', response.usertype);
-          console.log('Received Department:', response.Department);
-
-          // Navigate based on usertype and department
-          if (response.usertype === 'coordinator' && response.Department !== undefined) {
-            this.router.navigate([`/codashboard/${response.Department}`]);
-          } else if (response.usertype === 'hod') {
-            this.router.navigate(['/HOD-panal']);
-          } else if (response.usertype === 'admin') {
-            this.router.navigate(['/admin_dashboard']);
-          } else {
-            this.errorMessage = 'Invalid usertype or department.';
-            console.error('Invalid usertype or department:', response.usertype, response.Department);
-          }
-        } else {
-          this.errorMessage = response.message;
-          this.successMessage = '';
-          console.error(response.message);
-        }
-      },
+    this.store.dispatch(new Login(credentials)).subscribe(
+      () => {},
       (error) => {
-        this.errorMessage = 'An error occurred. Please try again later.';
-        this.successMessage = '';
         console.error('An error occurred:', error);
+        this.store.dispatch(new LoginFailure('An error occurred. Please try again later.'));
       }
     );
+  }
+
+  getUsername() {
+    return this.store.select(state => state.auth.username);
+  }
+
+  getErrorMessage() {
+    return this.store.select(state => state.auth.errorMessage);
+  }
+
+  getSuccessMessage() {
+    return this.store.select(state => state.auth.successMessage);
   }
 }

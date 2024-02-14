@@ -64,6 +64,8 @@ export class SalaryCertificateComponent implements OnInit {
 
   downloadWordFile(): void {
     const data = document.getElementById('certificate-content')?.innerHTML || '';
-    this.wordFileService.generateWordFile(data);
+    const filename = 'desired-filename'; // Provide your desired filename here
+    this.wordFileService.generateWordFile(data, filename);
   }
+  
 }

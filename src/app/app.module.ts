@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { NgxsModule } from '@ngxs/store';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -48,8 +48,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { AddfacultyComponent } from './page/addfaculty/addfaculty.component';
 import { LecturerDetailsComponent } from './lecturer-details/lecturer-details.component';
 
-
-
+import { AuthState } from 'src/app/page/login/login.state';
+import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 // service 
 
 import { LecturerService } from 'src/app/lecturer.service';
@@ -112,8 +112,8 @@ import { LecturerService } from 'src/app/lecturer.service';
     MatSnackBarModule,
     MatDialogModule,
     BrowserAnimationsModule,
-
-
+    NgxsModule.forRoot([AuthState]),
+    NgxsLoggerPluginModule.forRoot(),
   
   ],
   providers: [LecturerService],

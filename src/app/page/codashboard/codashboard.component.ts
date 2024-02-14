@@ -2,11 +2,9 @@
 
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LecturerviewService } from 'src/app/lecturerview.service';
-
-
+import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-codashboard',
   templateUrl: './codashboard.component.html',
@@ -17,20 +15,22 @@ export class CodashboardComponent implements OnInit {
   selectedLecturer: any;
   searchInput: string = '';
   Department: string='';
-  
+
   constructor(
     private http: HttpClient,
     private router: Router,
     private lecturerviewService: LecturerviewService,
     private route: ActivatedRoute,
-    
+    private cookieService: CookieService
   ) {}
 
-  ngOnInit(): void{
+  ngOnInit(): void {
+    this.Department = this.cookieService.get('Department');
+
     this.route.params.subscribe(params => {
-      this.Department = params['Department'];
+      this.Department = params['Department'] || this.Department;
     });
-  
+
     this.getAllLecturers();
   }
 
@@ -65,7 +65,7 @@ export class CodashboardComponent implements OnInit {
       );
     } else {
       this.getAllLecturers();
-    } 
+    }
   }
 
   handleInputChange(event: any) {
