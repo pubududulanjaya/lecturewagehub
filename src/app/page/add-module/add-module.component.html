@@ -20,39 +20,31 @@
          <i class="fas fa-times" id="cancel"></i>
        </label> -->
        <div class="sidebar">
-         <header>Menu</header>
-         <a routerLink="/codashboard"class="active">
-           <i class="fas fa-qrcode"></i>
-           <span>Dashboard</span>
-         </a>
-         <a routerLink="/codashboard"> 
+        <header>Menu</header>
+        <a routerLink="/codashboard/:Department"class="active">
+          <i class="fas fa-qrcode"></i>
+          <span>Dashboard</span>
+        </a>
+        <a routerLink="/codashboard"> 
+         <i class="far fa-caret-square-right"></i>
+          <span>Lecturer Name List</span>
+        </a>
+       <a routerLink="/add_modul"> 
           <i class="far fa-caret-square-right"></i>
-           <span>Lecturer Name List</span>
-         </a>
-        <a routerLink="/add_modul"> 
-           <i class="far fa-caret-square-right"></i>
-           <span>Add New Module</span>
-         </a>
-         <a routerLink="/add_batch"> 
-          <i class="far fa-caret-square-right"></i>
-           <span>Add New Batch</span>
-         </a>
-        <a routerLink="/lecregister">
-          <i class="far fa-caret-square-right"></i>
-           <span>Add New Lecturer</span>
-         </a>
-         <!-- <a href="#">
-           <i class="far fa-question-circle"></i>
-           <span>About</span>
-         </a>
-        
-         <a href="#">
-           <i class="far fa-envelope"></i>
-           <span>Contact</span>
-         </a> -->
-       </div>
-   </body>
+          <span>Add New Module</span>
+        </a>
+        <a routerLink="/add_batch"> 
+         <i class="far fa-caret-square-right"></i>
+          <span>Add New Batch</span>
+        </a>
+       <a routerLink="/lecregister">
+         <i class="far fa-caret-square-right"></i>
+          <span>Add New Lecturer</span>
+        </a>
+      </div>
+  </body>
 <div class="wrapper">
+  <h3>Add New Module for {{ Department }}</h3>
     <h3>Add New Module</h3>
     <div class="form-container">
       <div class="form-field">

@@ -22,7 +22,7 @@
              </label> -->
              <div class="sidebar">
                <header>Menu</header>
-               <a routerLink="/codashboard"class="active">
+               <a routerLink="/codashboard/:Department"class="active">
                  <i class="fas fa-qrcode"></i>
                  <span>Dashboard</span>
                </a>
@@ -49,6 +49,7 @@
 
     
     <div class="container">
+      <h3>{{ Department }} Coordinator Dashboard</h3>
         <div class="logout-list_container">
             <h3>Lecturer Name List</h3>
             <div class="Lecturer_Name_List">

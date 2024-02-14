@@ -31,7 +31,7 @@ body {
 .sidebar{
   /* position: fixed; */
   width: 240px;
-  left: -240px;
+  left: -200px;
   height: 100%;
   background-color: #fff;
   transition: all .5s ease;
@@ -388,7 +388,7 @@ input {
 h3 {
   text-align: center;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-  padding: 90px;
+  padding: 8px;
   margin-top: 10px;
   margin-left: 385px;
   font-size: 28px;

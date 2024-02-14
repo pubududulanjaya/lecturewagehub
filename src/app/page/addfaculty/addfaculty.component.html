@@ -1,12 +1,12 @@
 <!-- addfaculty.component.html -->
+
 <a class="back-button" routerLink="/admin_dashboard">Back</a>
 
-<body>
 <div class="container">
   <h2><b>Add New Faculty and Department</b></h2>
   
   <!-- Form to add new faculty -->
-  <form id="addFacultyForm" (ngSubmit)="save()">
+  <form id="addFacultyForm" (ngSubmit)="save()" #addFacultyForm="ngForm">
     <label for="facultyName"><b>Faculty Name:</b></label>
     <input type="text" [(ngModel)]="facultyName" id="facultyName" name="facultyName" required>
 
@@ -24,10 +24,7 @@
     <button (click)="saveDepartment()">Save</button>
     <button (click)="closeDialog()">Cancel</button>
   </div>
-</div>
 
-</body>
-  
   <!-- Table to view current faculty -->
   <h2>Current Faculty and Department</h2>
   <table id="facultyTable">
@@ -35,6 +32,7 @@
       <tr>
         <th>Faculty Name</th>
         <th>Department Names</th>
+        <th>Actions</th>
       </tr>
     </thead>
 
@@ -45,8 +43,11 @@
           <span *ngFor="let department of faculty.DepartmentName; let last = last">
             {{ department }}<br>{{ last ? '' : '' }}
           </span>
+        </td>
+        <td>
           <button (click)="openDialog(faculty)">Update</button>
         </td>
       </tr>
     </tbody>
   </table>
+</div>

@@ -18,9 +18,9 @@
       <div class="pass">Forgot Password?</div>
       <button type="submit" class="login_btn">Login</button>
       <!-- Display error message -->
-      <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
-      <!-- Display success message -->
-      <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+      <div *ngIf="getErrorMessage()" class="error-message">{{ getErrorMessage() }}</div>
+<!-- Display success message -->
+      <div *ngIf="getSuccessMessage()" class="success-message">{{ getSuccessMessage() }}</div>
     </form>
   </div>
 </body>

@@ -82,16 +82,14 @@
 
         <div class="coordinator-dashboard">
             <div class="lecturer-list">
-                <!-- Use Angular *ngFor directive to iterate through LecturerArray -->
                 <span *ngFor="let lecturer of LecturerArray">
                     <div class="lecturer-item">
-                        
                         <span class="lecturer-name" [routerLink]="['/lecprofile', lecturer.LecturerName]">{{ lecturer.Title }} {{ lecturer.LecturerName }}</span>
-                        <!-- Edit button -->
-                        <button class="lecview-button" (click)="editLecturer(lecturer)">Edit</button>
+                        <button class="lecview-button" (click)="viewStatus(lecturer)">View</button>
                     </div>
                 </span>
             </div>
+            
 
             <!-- Modal for viewing lecturer details -->
             <div class="modal fade" id="lecturerDetailsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

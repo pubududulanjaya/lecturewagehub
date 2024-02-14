@@ -1,9 +1,9 @@
-// addfaculty.component.ts
-
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AddfacultyService } from 'src/app/addfaculty.service';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-addfaculty',
@@ -11,6 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./addfaculty.component.css']
 })
 export class AddfacultyComponent implements OnInit {
+  @ViewChild('addFacultyForm') addFacultyForm!: NgForm; // ViewChild for the form
   facultyName: string = '';
   departmentName: string = '';
   facultyArray: any[] = [];
@@ -20,7 +21,12 @@ export class AddfacultyComponent implements OnInit {
   newDepartment: string = '';
   selectedFaculty: any;
 
-  constructor(private http: HttpClient, private addfacultyService: AddfacultyService, public dialog: MatDialog) {}
+  constructor(
+    private http: HttpClient,
+    private addfacultyService: AddfacultyService,
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit() {
     this.getAllFaculties();
@@ -28,23 +34,41 @@ export class AddfacultyComponent implements OnInit {
   }
 
   save() {
+    console.log('Entering save method');
+
     const addfacultyData = {
       FacultyName: this.facultyName,
       DepartmentName: this.departmentName.split(',').map(name => name.trim()),
     };
 
+    console.log('Data to be sent:', addfacultyData);
+
     this.addfacultyService.addfaculty(addfacultyData)
       .subscribe(
         (response: any) => {
+          console.log('Response:', response);
+
           if (response.status === true) {
             this.message = 'Faculty added successfully';
             this.getAllFaculties();
+            this.addFacultyForm.resetForm(); // Reset the form
+
+            // Display a message in the terminal/console
+            console.log('Faculty added successfully');
+
+            // Display a Snackbar message
+            this.snackBar.open('Faculty added successfully', 'Close', {
+              duration: 3000,
+              panelClass: ['success-snackbar'], // You can define your CSS class for styling
+            });
+
           } else {
             this.message = 'Failed to add Faculty: ' + response.message;
           }
         },
         (error) => {
           this.message = 'Error: ' + error.message;
+          console.error('Error in save method:', error);
         }
       );
   }
@@ -58,7 +82,7 @@ export class AddfacultyComponent implements OnInit {
   }
 
   getAllDepartments() {
-    this.http.get("http://localhost:8000/department/getAll")  // Adjust the URL if needed
+    this.http.get("http://localhost:8000/department/getAll")
       .subscribe((resultData: any) => {
         console.log("Departments data:", resultData);
         this.departmentArray = resultData.data;
@@ -86,12 +110,17 @@ export class AddfacultyComponent implements OnInit {
             if (response.status === true) {
               this.message = 'Departments updated successfully';
               this.getAllFaculties();
+
+              // Display a message in the terminal/console
+              console.log('Departments updated successfully');
             } else {
               this.message = 'Failed to update Departments: ' + response.message;
+              console.error('Failed to update Departments:', response);
             }
           },
           (error) => {
             this.message = 'Error: ' + error.message;
+            console.error('Error updating departments:', error);
           }
         );
     }
@@ -99,7 +128,7 @@ export class AddfacultyComponent implements OnInit {
 
   openDialog(faculty: any): void {
     this.selectedFaculty = faculty;
-this.dialogOpen = true;
+    this.dialogOpen = true;
   }
 
   saveDepartment(): void {
@@ -115,10 +144,12 @@ this.dialogOpen = true;
               this.getAllFaculties();
             } else {
               this.message = 'Failed to add Department: ' + response.message;
+              console.error('Failed to add Department:', response);
             }
           },
           (error) => {
             this.message = 'Error: ' + error.message;
+            console.error('Error adding department:', error);
           }
         );
       
@@ -129,5 +160,6 @@ this.dialogOpen = true;
   closeDialog(): void {
     this.dialogOpen = false;
     this.newDepartment = '';
+    this.addFacultyForm.resetForm();
   }
 }

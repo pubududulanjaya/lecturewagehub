@@ -1,77 +1,89 @@
-<a class="back-button" routerLink="/admin-panal">Back
-  
-</a>
+<a class="back-button" routerLink="/admin_dashboard">Back</a>
+
 <body>
-    <h2>{{ Title }} {{ LecturerName }} Profile</h2>
-   
-    <div class="profile-container">
-        <div class="photo-container">
-            <img src="assets/images/cinec-lec.jpg" alt="Lecturer Photo" width="200" height="200">
-        </div>
-        <div class="profile-details">
-            <div class="profile-info">
-                <span><label>Rate per hour:</label> 50</span>
-                <span><label>Departments Name:</label> Computer Science,health Science,</span>
-                <span><label>Total Salary:</label> Rs 28,500</span>
-                <span><label>Total Hours:</label> 6</span>
-            </div>
-        </div>
-        <div class="bottom-buttons">
-            <button class="Delete_profile-button">View Profile</button>
-            <button class="View_Salary_Report-button" [routerLink]="['/salary_Certificate', LecturerName]">View Certificate</button>
+  <h2>{{ lecturerDetails?.Title }} {{ LecturerName }} Profile</h2>
 
-            <button class="View_Salary_Report-button" routerLink="/salary_Certificate">Tax Report</button>
-            <button class="View_Salary_Report-button" routerLink="/rate-history" >Rate History</button>
-        </div>
+  <div class="profile-container">
+    <div class="photo-container">
+      <img src="assets/images/cinec-lec.jpg" alt="Lecturer Photo" width="200" height="200">
+    </div>
+    <div class="profile-details">
+      <div *ngIf="lecturerDetails" class="profile-info">
+        <span><label>Rate per hour:</label> {{ lecturerDetails.LecturerName }}</span>
+        <span><label>Departments Name:</label> {{ lecturerDetails.Department?.join(', ') }}</span>
+        <span><label>Total Salary:</label> Rs {{ lecturerDetails.MonthlyPayment }}</span>
+        <span><label>Total Hours:</label> {{ lecturerDetails.MonthlyPayment }}</span>
+      </div>
+    </div>
+    <div class="bottom-buttons">
+      <button class="Delete_profile-button">View Profile</button>
+      <button class="View_Salary_Report-button" [routerLink]="['/salary_Certificate', LecturerName]">View Certificate</button>
+      <button class="View_Salary_Report-button" routerLink="/salary_Certificate">Tax Report</button>
+      <button class="View_Salary_Report-button" routerLink="/rate-history">Rate History</button>
+    </div>
+  </div>
+
+  <div id="scontainer">
+    <div id="header">
+      <div id="total-salary">
+        <!-- <p>Total Salary: RS. {{ lecturerDetails.LecturerName }}</p>
+        <p>Emp ID: {{ lecturerDetails.LecturerName }}</p> -->
+      </div>
+      <div id="all-box">
+        <select>
+          <option value="option1">All</option>
+          <option value="option2">Department 2</option>
+          <option value="option3">Department 3</option>
+        </select>
+      </div>
     </div>
 
+    <table>
+      <thead>
+        <tr>
+          <th>Department</th>
+          <th>Module</th>
+          <th>Date</th>
+          <th>Hours</th>
+          <th>Salary</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Department 1</td>
+          <td>Module 1</td>
+          <td>2023-10-24</td>
+          <td>3</td>
+          <td>RS. 15,000</td>
+        </tr>
+        <tr>
+          <td>Department 2</td>
+          <td>Module 2</td>
+          <td>2023-10-25</td>
+          <td>3</td>
+          <td>Rs. 13,500</td>
+        </tr>
+      </tbody>
+    </table><br>
 
-    <div id="scontainer">
-        <div id="header">
-            <div id="total-salary">
-                <p>Total Salary: RS. 28,500</p>
-                <p>Emp ID: E2145</p>
-            </div>
-            <div id="all-box">
-                <select>
-                    <option value="option1">All</option>
-                    <option value="option2">Department 2</option>
-                    <option value="option3">Department 3</option>
-                </select>
-            </div>
-        </div>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Department</th>
-                    <th>Module</th>
-                    <th>Date</th>
-                    <th>Hours</th>
-                    <th>Salary</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Department 1</td>
-                    <td>Module 1</td>
-                    <td>2023-10-24</td>
-                    <td>3</td>
-                    <td>RS. 15,000</td>
-                </tr>
-                <tr>
-                    <td>Department 2</td>
-                    <td>Module 2</td>
-                    <td>2023-10-25</td>
-                    <td>3</td>
-                    <td>Rs. 13,500</td>
-                </tr>
-            </tbody>
-        </table>
+    <h2>other Payments balance</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Total Payments</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let payment of otherPayments">
+          <td>{{ payment.Description }}</td>
+          <td>Rs:{{ payment.TotalPayments }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="!otherPayments || otherPayments.length === 0" class="no-payment-message">
+      No other payment
     </div>
-
+    
+  </div>
 </body>
-
-
-
-   

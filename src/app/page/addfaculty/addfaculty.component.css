@@ -67,6 +67,39 @@ div[role="dialog"] {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+
+/* addfaculty.component.css */
+
+.message-container {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 1000; /* Make sure it's on top */
+}
+
+.success-message {
+  color: green;
+}
+
+.error-message {
+  color: red;
+}
+
+.message {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.container {
+  margin-top: 50px; /* Adjust this margin based on your layout */
+}
+
+
+
 /* Button styles */
 .back-button {
 	position: absolute;

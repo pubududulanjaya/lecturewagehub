@@ -15,14 +15,16 @@
       <h3><b>Certificate of Withholding Tax(WHT) / Advanced Income Tax(AIT) Deduction</b></h3>
   
       <div>
-        <p>Name and address of the Withholding Agent: <b>CINEC Campus (pvt) Ltd Millennium Drive, IT Park, Malabe</b></p>
+        <p>Name and address of the Withholdee: {{ lecturerDetails?.LecturerName }}</p>
       </div><br>
       <div>
-        <p>Name and address of the Withholdee:{{ lecturerDetails?.LecturerName }}</p>
+        <p>Name and address of the Withholdee: {{ lecturerDetails?.LecturerName }}</p>
       </div><br>
       <div>
-        <p>National Identity Card No./Passport No./Tax Identification No: 199456464659</p>
+        <p>National Identity Card No./Passport No./Tax Identification No: {{ lecturerDetails?.NIC  }}</p>
       </div><br>
+      
+      
       <div>
         <p>Payment Made for Period: from 01.01.2023  to   31.01.2023 </p>
       </div><br>
@@ -51,31 +53,23 @@
             <td>10,000.00</td>
             <td>190,000.00</td>
           </tr>
+          <tr *ngFor="let payment of otherPayments">
+            <td>other Payments<br> ({{ payment.Description }})</td>
+            <td>{{ payment.TotalPayments }}</td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+            <td>{{ payment.TotalPayments }} </td>
+          </tr>
+           
           <tr>
-              <td>Consultancy fees</td>
-              <td>200,000.00</td>
-              <td></td>
-              <td>5%</td>
-              <td>10,000.00</td>
-              <td>190,000.00</td>
-            </tr>
-            <tr>
-              <td>Consultancy fees</td>
-              <td>200,000.00</td>
-              <td></td>
-              <td>5%</td>
-              <td>10,000.00</td>
-              <td>190,000.00</td>
-            </tr>
-            <tr>
-              <td><b>Total</b></td>
-              <td><b>600,000.00</b></td>
-              <td><b></b></td>
-              <td><b></b></td>
-              <td><b>30,000.00</b></td>
-              <td><b>570,000.00</b></td>
-            </tr>
-          <!-- Repeat the above row for each payment -->
+            <td><b>Total</b></td>
+            <td><b>{{ calculateTotalAmountSubjectToWHT() }}</b></td>
+            <td><b></b></td>
+            <td><b></b></td>
+            <td><b>{{ calculateTotalWHTDeducted() }}</b></td>
+            <td><b>{{ calculateTotalNetAmountPaid() }}</b></td>
+          </tr>
         </tbody>
       </table>
   
