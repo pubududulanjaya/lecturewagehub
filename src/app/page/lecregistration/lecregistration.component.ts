@@ -28,7 +28,7 @@ export class LecregistrationComponent {
   bankCode: string = '';
   BranchName: string = '';
   BranchCode: string = '';
-
+  Request_State:String='Hod_pendding';
   Department: string = '';
 
   cvFile: File | null = null;
@@ -84,7 +84,7 @@ export class LecregistrationComponent {
       bankCode: this.bankCode,
       BranchName: this.BranchName,
       BranchCode: this.BranchCode,
-
+      Request_State:this.Request_State,
       Department: this.Department,
     };
 

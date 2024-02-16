@@ -546,3 +546,58 @@ button {
 button:hover {
   background-color: #0056b3;
 }
+
+.update-state {
+  background-color: #4caf50; /* Green */
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin-right: 10px; /* Adjust as needed */
+  cursor: pointer;
+}
+
+/* Style for the checkmark icon */
+.checkmark {
+  color: #4caf50; /* Green */
+  font-size: 18px;
+}
+
+/* Style for the view button */
+.lecview-button {
+  background-color: #007bff; /* Blue */
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  cursor: pointer;
+}
+.checkmark {
+  color: #4caf50; /* Green */
+  font-size: 18px;
+  display: flex;
+  padding-right: 20px;
+  
+}
+.filter-container {
+  margin-bottom: 20px;
+}
+
+.filter-container label {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.filter-container select {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}

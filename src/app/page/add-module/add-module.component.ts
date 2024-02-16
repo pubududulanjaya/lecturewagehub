@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ModuleService } from 'src/app/module.service';
 import { LecturerviewService } from 'src/app/lecturerview.service';
 import { HttpClient } from '@angular/common/http';
-import { Router, ActivatedRoute } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service'; // Import CookieService
+import Swal from 'sweetalert2'; 
+import { ActivatedRoute, Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-add-module',
@@ -12,8 +13,8 @@ import { CookieService } from 'ngx-cookie-service'; // Import CookieService
 })
 export class AddModuleComponent implements OnInit {
   LecturerArray: any[] = [];
-  selectedLecturer: string = '';
-  Department: string = '';
+  selectedLecturer: string = ''; // Update property name
+
   ModuleName: string = '';
   ModuleCode: string = '';
   Hours: string = '';
@@ -22,22 +23,14 @@ export class AddModuleComponent implements OnInit {
     private http: HttpClient,
     private lecturerviewService: LecturerviewService,
     private moduleService: ModuleService,
-    private route: ActivatedRoute,
     private router: Router,
-    private cookieService: CookieService // Add CookieService to the constructor
+    private route: ActivatedRoute,
+    private cookieService: CookieService
   ) {}
 
   ngOnInit() {
-    this.Department = this.cookieService.get('Department');
-
-    this.route.params.subscribe(params => {
-      this.Department = params['Department'] || this.Department;
-    });
-
-  
     this.getAllLecturers();
   }
-  
 
   getAllLecturers() {
     this.http.get("http://localhost:8000/lectureDetails/getAll")
@@ -52,8 +45,7 @@ export class AddModuleComponent implements OnInit {
       ModuleName: this.ModuleName,
       ModuleCode: this.ModuleCode,
       LecturerName: this.selectedLecturer, // Update property name
-      Hours: this.Hours,
-      Department: this.Department,
+      Hours: this.Hours
     };
 
     this.moduleService.addmodule(moduleData)
@@ -66,8 +58,16 @@ export class AddModuleComponent implements OnInit {
       });
   }
   logout() {
-    // Clear cookies and navigate to the login page
-    this.cookieService.delete('Department');
-    this.router.navigate(['/login']); // Replace '/login' with the path to your login page
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Logged out successfully',
+      showConfirmButton: false,
+      timer: 1500
+    }).then(() => {
+      // Clear cookies and navigate to the login page
+      this.cookieService.delete('Department');
+      this.router.navigate(['/login']); // Replace '/login' with the path to your login page
+    });
   }
 }

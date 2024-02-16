@@ -5,7 +5,6 @@
   <div class="logout-dropdown" id="dropdown">
       <button onclick="changePassword">Change Password</button>
       <button (click)="logout()">Logout</button>
-
   </div>
 </div>
 
@@ -21,31 +20,35 @@
          <i class="fas fa-times" id="cancel"></i>
        </label> -->
        <div class="sidebar">
-        <header>Menu</header>
-        <a routerLink="/codashboard/:Department"class="active">
-          <i class="fas fa-qrcode"></i>
-          <span>Dashboard</span>
-        </a>
-        <a routerLink="/codashboard"> 
-         <i class="far fa-caret-square-right"></i>
-          <span>Lecturer Name List</span>
-        </a>
-       <a routerLink="/add_modul"> 
+         <header>Menu</header>
+         <a routerLink="/codashboard"class="active">
+           <i class="fas fa-qrcode"></i>
+           <span>Dashboard</span>
+         </a>
+         <a routerLink="/codashboard"> 
           <i class="far fa-caret-square-right"></i>
-          <span>Add New Module</span>
-        </a>
-        <a routerLink="/add_batch"> 
+           <span>Lecturer Name List</span>
+         </a>
+        <a routerLink="/add_modul"> 
+           <i class="far fa-caret-square-right"></i>
+           <span>Add New Module</span>
+         </a>
+         <a routerLink="/add_batch"> 
+          <i class="far fa-caret-square-right"></i>
+           <span>Add New Batch</span>
+         </a>
+        <a routerLink="/lecregister">
+          <i class="far fa-caret-square-right"></i>
+           <span>Add New Lecturer</span>
+         </a>
+         <a routerLink="/add_Time"> 
          <i class="far fa-caret-square-right"></i>
-          <span>Add New Batch</span>
+          <span>Add Timetable</span>
         </a>
-       <a routerLink="/lecregister">
-         <i class="far fa-caret-square-right"></i>
-          <span>Add New Lecturer</span>
-        </a>
-      </div>
-  </body>
+       </div>
+   </body>
+
 <div class="wrapper">
-  <h3>Add New Module for {{ Department }}</h3>
     <h3>Add New Module</h3>
     <div class="form-container">
       <div class="form-field">
@@ -58,7 +61,7 @@
       </div>
       <div class="form-field">
         <label for="lecturerSelect">Select Lecturer:</label>
-        <select id="lecturerSelect" (ngModel)="selectedLecturer" name="lecturerSelect" required>
+        <select id="lecturerSelect" [(ngModel)]="selectedLecturer" name="lecturerSelect" required>
           <option *ngFor="let lecturer of LecturerArray" [value]="lecturer.LecturerName">{{ lecturer.LecturerName }}</option>
         </select>
       </div>

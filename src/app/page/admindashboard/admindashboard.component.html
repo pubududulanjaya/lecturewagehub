@@ -63,6 +63,8 @@
     </body>
 
     <div class="container">
+
+        
         <div class="logout-list_container">
             <h3>Lecturer Name List</h3>
             <div class="Lecturer_Name_List">
@@ -79,12 +81,26 @@
               </div>
             </div>
         </div>
+        <div class="filter-container">
+            <label for="requestStateSelect">Select Request State:</label>
+            <select id="requestStateSelect" [(ngModel)]="Request_State" (change)="filterLecturers()">
+                <option value="admin_pendding">Admin Pending</option>
+                <option value="accepted">Accepted</option>
+                <!-- Add more options if needed -->
+            </select>
+        </div>
 
         <div class="coordinator-dashboard">
             <div class="lecturer-list">
-                <span *ngFor="let lecturer of LecturerArray">
+                <span  *ngFor="let lecturer of filteredItems">
                     <div class="lecturer-item">
                         <span class="lecturer-name" [routerLink]="['/lecprofile', lecturer.LecturerName]">{{ lecturer.Title }} {{ lecturer.LecturerName }}</span>
+                        <td>
+                            <button *ngIf="lecturer.Request_State === 'admin_pendding'" type="button" class="update-state" (click)="updateState(lecturer)">Accept</button>
+                            <span *ngIf="lecturer.Request_State === 'accepted'" class="checkmark">&#10004;</span>
+                          </td>
+                          
+                        
                         <button class="lecview-button" (click)="viewStatus(lecturer)">View</button>
                     </div>
                 </span>

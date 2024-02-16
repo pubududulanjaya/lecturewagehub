@@ -5,12 +5,12 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class BatchService {
-  private apiUrl = 'http://localhost:8000/batchDetails';
+  private apiUrl = 'http://localhost:8000/addBatch';
 
   constructor(private http: HttpClient) {}
 
   addBatch(batchData: any) {
-    const apiEndpoint = `${this.apiUrl}/addBatch/${batchData.Department}`;
+    const apiEndpoint = `${this.apiUrl}/create`;
     return this.http.post(apiEndpoint, batchData);
   }
 

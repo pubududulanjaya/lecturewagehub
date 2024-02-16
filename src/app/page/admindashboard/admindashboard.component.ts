@@ -3,6 +3,32 @@ import { Component, OnInit } from '@angular/core';
 import { LecturerviewService } from 'src/app/lecturerview.service';
 import { Router } from '@angular/router';
 
+
+
+
+interface lecturer {
+  id: string;
+  LecturerName: string;
+  Title:string;
+  MobileNumber:string;
+  NIC:string;
+  AddressLine1:string;
+  AddressLine2:string;
+  State:string;
+  Email:string;
+  SalaryType:string;
+  MonthlyPayment:string;
+  RatePerHour:string;
+  AccountName:string;
+  AccountNumber:string;
+  BankName:string;
+  bankCode:string;
+  BranchName:string;
+  BranchCode:string;
+  Request_State: string;
+  Department:string;
+}
+
 @Component({
   selector: 'app-admindashboard',
   templateUrl: './admindashboard.component.html',
@@ -12,6 +38,8 @@ export class AdmindashboardComponent {
   LecturerArray: any[] = [];
   selectedLecturer: any; 
   searchInput: string = '';
+  filteredItems: any[] = [];
+  public Request_State: string = '';
 
   constructor(private http: HttpClient, private lecturerviewService: LecturerviewService,private router: Router) {}
 
@@ -19,13 +47,24 @@ export class AdmindashboardComponent {
     this.getAllLecturers();
   }
 
-  getAllLecturers() {
-    this.http.get("http://localhost:8000/lectureDetails/getAll")
+  getAllLecturers(): void {
+    this.http.get<any>('http://localhost:8000/lectureDetails/getAll')
       .subscribe((resultData: any) => {
         console.log(resultData);
         this.LecturerArray = resultData.data;
+        this.filterLecturers();
       });
   }
+  filterLecturers(): void {
+    if (this.Request_State.trim() !== '') {
+      this.filteredItems = this.LecturerArray.filter((lecturer) =>
+        lecturer.Request_State === this.Request_State
+      );
+    } else {
+      this.filteredItems = this.LecturerArray;
+    }
+  }
+  
 
   editLecturer(lecturer: any) {
     // Add your logic for editing a lecturer
@@ -52,4 +91,22 @@ export class AdmindashboardComponent {
     this.searchInput = event.target.value;
     this.searchLecturers();
   }
+
+  updateState(data: any): void {
+    const updatedlecturer: lecturer = { ...data, Request_State: 'accepted' };
+    
+    this.http.patch(`http://localhost:8000/lectureDetails/update/${data.id}`, updatedlecturer)
+      .subscribe(
+        (response) => {
+          console.log(response);
+          alert('Report State updated to admin pending');
+         
+          this.getAllLecturers(); 
+        },
+        (error) => {
+          console.error('Error updating report State:', error);
+        }
+      );
+  }
+
 }
