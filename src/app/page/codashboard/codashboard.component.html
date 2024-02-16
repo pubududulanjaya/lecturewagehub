@@ -5,7 +5,8 @@
         </span>
         <div class="logout-dropdown" id="dropdown">
             <button onclick="changePassword">Change Password</button>
-            <button onclick="logout">Logout</button>
+            <button (click)="logout()">Logout</button>
+
         </div>
     </div>
     
@@ -71,11 +72,11 @@
         <div class="coordinator-dashboard">
             <div class="lecturer-list">
                 <!-- Use Angular *ngFor directive to iterate through LecturerArray -->
-                <span *ngFor="let lecturer of LecturerArray">
+                <span *ngFor="let lecturer of filteredItems">
                     <div class="lecturer-item">
                         <span class="lecturer-name">{{ lecturer.Title }} {{ lecturer.LecturerName }}</span>
                         <!-- Edit button -->
-                        <button class="lecview-button" (click)="editLecturer(lecturer.LecturerName)" >Edit</button>
+                        <!-- <button class="lecview-button" (click)="editLecturer(lecturer.LecturerName)" >Edit</button> -->
                     </div>
                 </span>
             </div>

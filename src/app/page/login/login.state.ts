@@ -1,10 +1,12 @@
-// login.state.ts
+// auth.state.ts
+
 import { Injectable, NgZone } from '@angular/core';
 import { State, Action, StateContext, Selector } from '@ngxs/store';
-import { tap, catchError } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { LoginService } from 'src/app/login.service';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import Swal from 'sweetalert2';
 
 export class Login {
   static readonly type = '[Auth] Login';
@@ -44,7 +46,7 @@ export class AuthState {
     private loginService: LoginService,
     private router: Router,
     private ngZone: NgZone,
-    private cookieService: CookieService //Added
+    private cookieService: CookieService
   ) {}
 
   @Selector()
@@ -74,7 +76,7 @@ export class AuthState {
     );
   }
 
-@Action(LoginSuccess)
+  @Action(LoginSuccess)
   loginSuccess(ctx: StateContext<AuthStateModel>, action: LoginSuccess) {
     const response = action.payload;
     ctx.patchState({
@@ -89,8 +91,9 @@ export class AuthState {
       this.ngZone.run(() => {
         if (response.usertype === 'coordinator' && response.Department !== undefined) {
           this.cookieService.set('Department', response.Department);
-          this.router.navigate([`/codashboard`]); 
-        } else if (response.usertype === 'hod') {
+          this.router.navigate(['/codashboard']);
+        } else if (response.usertype === 'hod' && response.Department !== undefined) {
+          this.cookieService.set('Department', response.Department);
           this.router.navigate(['/HOD-panel']);
         } else if (response.usertype === 'admin') {
           this.router.navigate(['/admin_dashboard']);
@@ -113,6 +116,13 @@ export class AuthState {
     ctx.patchState({
       errorMessage,
       successMessage: '',
+    });
+
+    // Display SweetAlert for the error message
+    Swal.fire({
+      icon: 'error',
+      title: 'Login Error',
+      text: errorMessage,
     });
   }
 }

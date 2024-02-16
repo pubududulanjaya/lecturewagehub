@@ -65,4 +65,9 @@ export class AddModuleComponent implements OnInit {
         }
       });
   }
+  logout() {
+    // Clear cookies and navigate to the login page
+    this.cookieService.delete('Department');
+    this.router.navigate(['/login']); // Replace '/login' with the path to your login page
+  }
 }

@@ -49,3 +49,66 @@ button {
     cursor: pointer;
     border-radius: 10px;
 }
+
+.logout-container {
+    position: absolute;
+    top: 10px;
+    right: -50px;
+  }
+  
+  .logout-list-container {
+    position: absolute;
+    top: 10px;
+    right: 400px;
+    padding: 10px;
+  }
+  
+  
+  /* Logout icon style */
+  .logout-icon {
+    font-size: 45px;
+    cursor: pointer;
+    margin-right: 100px;
+    color: #181717; /* Change the color as needed */
+  }
+  
+  /* Logout dropdown menu style */
+  .logout-dropdown {
+    display: none;
+    position: absolute;
+    top: 40px;
+    left: -100px;
+    background-color: #000000;
+    border: 1px solid #0d0a0a;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    color: #000; /* Change text (font) color to black */
+  }
+  
+  /* Style for dropdown items (buttons) */
+  .logout-dropdown button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    text-align: left;
+    transition: background-color 0.3s;
+  }
+  
+  .logout-dropdown button:hover {
+    background-color: #3a3535;
+  }
+  
+  /* Show the dropdown when hovering over the container */
+  .logout-container:hover .logout-dropdown {
+    display: block;
+  }
+  
+  /* Style for the login image */
+  .login-image {
+    padding-top: 13px;
+    width: 40px;
+    height: 40px;
+  }

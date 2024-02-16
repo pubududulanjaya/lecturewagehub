@@ -1,7 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { LecturerviewService } from 'src/app/lecturerview.service';
-import { AuthService } from 'src/app/auth.service';
+
+import { CookieService } from 'ngx-cookie-service';
+import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-hoddashboard',
@@ -13,35 +16,36 @@ export class HoddashboardComponent implements OnInit {
   ModuleData: any[] = [];
   selectedLecturer: any;
   Department: string | null =null;
+  filteredItems: any[] =[];
 
   constructor(
     private http: HttpClient,
     private lecturerviewService: LecturerviewService,
-    private authService: AuthService
+  
+    private cookieService: CookieService,
+    private router: Router,
+    private route: ActivatedRoute,
   ) {}
 
-  ngOnInit() {
-    console.log("Fetching lecturers...");
+  ngOnInit(): void {
+    this.Department = this.cookieService.get('Department');
+
+    this.route.params.subscribe(params => {
+      this.Department = params['Department'] || this.Department;
+    });
+
     this.getAllLecturers();
-  
-    console.log("Fetching modules...");
-    this.getAllModules();
-  
-    // Fetch and set department name
-    const loggedInUser = this.authService.getLoggedInUser();
-    if (loggedInUser) {
-      this.Department = this.authService.getDepartmentForUser(loggedInUser);
-      console.log("Department Name:", this.Department);
-    }
-  
   }
   
 
+  
   getAllLecturers() {
-    this.http.get("http://localhost:8000/lectureDetails/getAll")
+    // Assuming you have an API endpoint that returns lecturers filtered by department
+    this.http.get(`http://localhost:8000/lectureDetails/getAll?Department=${this.Department}`)
       .subscribe((resultData: any) => {
-        console.log("Lecturers data:", resultData);
+        console.log(resultData);
         this.LecturerArray = resultData.data;
+        this.filteredItems=this.LecturerArray.filter(item => item.Department === this.Department );
       });
   }
 
@@ -95,5 +99,18 @@ export class HoddashboardComponent implements OnInit {
     // Add your logic here
     console.log("Viewing all data is complete. Performing additional action.");
     // For example, you can trigger another function or display a message.
+  }
+  logout() {
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Logged out successfully',
+      showConfirmButton: false,
+      timer: 1500
+    }).then(() => {
+      // Clear cookies and navigate to the login page
+      this.cookieService.delete('Department');
+      this.router.navigate(['/login']); // Replace '/login' with the path to your login page
+    });
   }
 }

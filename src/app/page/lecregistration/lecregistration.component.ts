@@ -30,6 +30,9 @@ export class LecregistrationComponent {
   BranchCode: string = '';
 
   Department: string = '';
+
+  cvFile: File | null = null;
+  profilePhotoFile: File | null = null;
   constructor(
     private lecregistrationService: LecregistrationService,
     private cookieService: CookieService,
@@ -47,6 +50,16 @@ export class LecregistrationComponent {
     });
   }
 
+  onFileSelected(event: any, type: string) {
+    const file: File = event.target.files[0];
+    if (file) {
+      if (type === 'cv') {
+        this.cvFile = file;
+      } else if (type === 'profilePhoto') {
+        this.profilePhotoFile = file;
+      }
+    }
+  }
   save() {
     // Increment the lecturer ID for the next profile
     this.lecturerId++;

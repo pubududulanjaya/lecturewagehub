@@ -11,20 +11,11 @@
 
 <div class="container rounded bg-white mt-5 mb-5">
   <div class="row">
-    <h3>Add New Module for {{ Department }}</h3>
+    <h3>Add New Lecturer for {{ Department }}</h3>
       <div class="col-md-3 border-right">
           <div class="d-flex flex-column align-items-center text-center p-3 py-5">
             <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
-            <span>
-                <div class="mt-5 text-center">
-                    <label for="profile-image">Upload Image</label>
-                    <input type="file" id="profile-image" accept="image/*">
-                </div> 
-                <div class="form-group">
-                    <label for="cv">Upload CV</label>
-                    <input type="file" id="cv" accept=".pdf, .doc, .docx">
-                </div>
-            </span>
+            
             <!-- <span>
                 <div class="mt-5 text-center">
                     <button class="btn btn-primary profile-button" type="button">Upload Profile Image</button>
@@ -40,6 +31,15 @@
                <input type="text" [(ngModel)]="lecturerId" class="form-control" placeholder="Lecturer ID" disabled>
             </div>
          </div>
+
+         <!-- <div class="col-md-12">
+            <label class="labels">CV</label>
+            <input type="file" (change)="onFileSelected($event, 'cv')" accept=".pdf,.doc,.docx">
+          </div>
+          <div class="col-md-12">
+            <label class="labels">Profile Photo</label>
+            <input type="file" (change)="onFileSelected($event, 'profilePhoto')" accept="image/*">
+          </div> -->
 
          
 

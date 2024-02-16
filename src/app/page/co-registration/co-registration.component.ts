@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { CoordinatorService } from 'src/app/coordinator.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoginService } from 'src/app/login.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-co-registration',
@@ -94,6 +95,13 @@ export class CoRegistrationComponent implements OnInit {
           this.loginService.saveLogin(loginData).subscribe((loginResponse: any) => {
             if (loginResponse.success) {
               this.showSnackBar('Coordinator added successfully');
+              Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Coordinator added successfully',
+                showConfirmButton: false,
+                timer: 1500
+              });
             } else {
               this.showSnackBar('Failed to save login information: ' + loginResponse.message);
             }
