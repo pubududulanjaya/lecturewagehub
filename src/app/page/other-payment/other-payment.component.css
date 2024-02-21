@@ -26,11 +26,11 @@ body {
   --gradient-color: #FBFBFB;
 }
 
-/* .wrapper {
-	width: 700px;
-	height: 60px auto;
-	padding: 60px;
-} */
+.department {
+  float: right;
+  padding-left: 20px; /* Adjust as needed */
+}
+
 
 form {
   background-color: #fff;

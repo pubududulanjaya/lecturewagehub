@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { WordFileService } from 'src/app/word-file.service';
 import { LecturerService } from 'src/app/lecturer.service';
 import { OtherpaymentService } from 'src/app/otherpayment.service';
+import { HttpClient } from '@angular/common/http';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-salary-certificate',
@@ -13,13 +15,15 @@ export class SalaryCertificateComponent implements OnInit {
   lecturerDetails: any;
   LecturerName!: string;
   otherPayments: any[] = []; // Array to store other payment data
-
+  LecturerArray: any[] = []; 
+  filteredItems: any[] = []; 
 
   constructor(
     private wordFileService: WordFileService,
     private lecturerService: LecturerService,
     private route: ActivatedRoute,
     private otherPaymentService: OtherpaymentService, 
+    private http: HttpClient,
   ) {}
 
   ngOnInit(): void {
@@ -37,6 +41,35 @@ export class SalaryCertificateComponent implements OnInit {
         }
       );
     });
+    this.getAllLecturers();
+  }
+
+  getAllLecturers(): void {
+    this.http.get<any>('http://localhost:8000/lectureDetails/getAll')
+      .subscribe((resultData: any) => {
+        console.log(resultData);
+        this.LecturerArray = resultData.data;
+        this.filterLecturers();
+      });
+  }
+
+  filterLecturers(): void {
+    if (this.LecturerName.trim() !== '') {
+      this.filteredItems = this.LecturerArray.filter((lecturer) =>
+        lecturer.LecturerName === this.LecturerName
+      );
+    } else {
+      this.filteredItems = this.LecturerArray;
+    }
+    if(this.filteredItems.length === 0){
+      Swal.fire({
+        position: 'center',
+        icon: 'info',
+        title: 'NOT found',
+        showConfirmButton: false,
+      });
+      return;
+    }
   }
 
   fetchLecturerDetails(): void {

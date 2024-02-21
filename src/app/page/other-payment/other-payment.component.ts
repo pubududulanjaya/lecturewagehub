@@ -11,7 +11,9 @@ import { OtherpaymentService } from 'src/app/otherpayment.service';
 export class OtherPaymentComponent implements OnInit{
   LecturerArray: any[] = [];
   selectedLecturer: string = '';
+  searchText: string = '';
 
+  filteredLecturers: any[] = [];
   LecturerName: string = ''; // Initialize the properties
   Description: string = '';
   TotalPayments: string = '';
@@ -30,10 +32,15 @@ export class OtherPaymentComponent implements OnInit{
     this.http.get("http://localhost:8000/lectureDetails/getAll")
       .subscribe((resultData: any) => {
         console.log(resultData);
-        this.LecturerArray = resultData.data;
+        this.filteredLecturers = resultData.data; // Initialize filteredLecturers
       });
   }
 
+  filterLecturers() {
+    this.filteredLecturers = this.LecturerArray.filter((lecturer) =>
+      lecturer.LecturerName.toLowerCase().includes(this.searchText.toLowerCase())
+    );
+  }
   save() {
     const otherpaymentData = {
      

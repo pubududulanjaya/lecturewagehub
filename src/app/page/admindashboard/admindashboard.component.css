@@ -177,19 +177,7 @@ p {
   color: #d6adff;
   margin: 0;
 }
-/* nav{
-  margin-top: 15%;
-} */
 
-/* .clearfix:before,
-.clearfix:after {
-  content: " ";
-  display: table;
-}
-
-.clearfix:after {
-  clear: both;
-} */
 
 .container {
   position: relative;
@@ -235,133 +223,6 @@ p {
   }
 }
 
-/* Main navigation menu */
-/* .mcd-menu {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  background: #05007d;
-  width: 239px;
-  border-radius: 2px;
-  margin-left: 0;
-}
-
-.mcd-menu li {
-  padding: 10px;
-  border-bottom: 1px solid #555;
-}
-
-.mcd-menu li a {
-  display: block;
-  text-decoration: none;
-  padding: 12px 20px;
-  color: #ffffff;
-  text-align: left;
-  height: 36px;
-  position: relative;
-  border-bottom: 5px solid #EEE;
-}
-
-
-.mcd-menu li a strong {
-  display: block;
-  text-transform: uppercase;
-}
-
-.mcd-menu li a i,
-.mcd-menu li a strong,
-.mcd-menu li a small {
-  position: relative;
-  transition: all 300ms linear;
-}
-
-.mcd-menu li:hover > a i {
-  opacity: 1;
-}
-
-.mcd-menu li:hover a strong {
-  opacity: 1;
-}
-
-.mcd-menu li:hover a small {
-  opacity: 1;
-}
-
-.mcd-menu li:hover > a {
-  color: #ffffff;
-}
-
-.mcd-menu li ul,
-.mcd-menu li ul li ul {
-  position: absolute;
-  height: auto;
-  min-width: 200px;
-  padding: 0;
-  margin: 0;
-  background: #FFF;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 300ms linear;
-  left: 280px;
-  top: 0px;
-  border-left: 4px solid #e67e22;
-}
-
-.mcd-menu li ul:before {
-  content: "";
-  position: absolute;
-  top: 25px;
-  left: -9px;
-  border-right: 5px solid #e67e22;
-  border-bottom: 5px solid transparent;
-  border-top: 5px solid transparent;
-}
-
-.mcd-menu li:hover > ul,
-.mcd-menu li ul li:hover > ul {
-  display: block;
-  opacity: 1;
-  visibility: visible;
-  left: 250px;
-}
-
-.mcd-menu li ul li a {
-  padding: 10px;
-  text-align: left;
-  border: 0;
-  border-bottom: 1px solid #5679a2;
-  height: auto;
-}
-
-.mcd-menu li ul li a i {
-  font-size: 16px;
-  display: inline-block;
-  margin: 0 10px 0 0;
-}
-
-.mcd-menu li ul li ul {
-  left: 230px;
-  top: 0;
-  border: 0;
-  border-left: 4px solid #e67e22;
-}
-
-.mcd-menu li ul li ul:before {
-  content: "";
-  position: absolute;
-  top: 15px;
-  left: -9px;
-  border-right: 5px solid #e67e22;
-  border-bottom: 5px solid transparent;
-  border-top: 5px solid transparent;
-}
-
-.mcd-menu li ul li:hover > ul {
-  top: 0px;
-  left: 200px;
-} */
-
-/* Back button style */
 .back-button {
   position: absolute;
   top: 20px;
@@ -513,7 +374,41 @@ h3 {
   font-weight: bold; /* Make the text bold */
 }
 
-/* Updated styles for .lecview-button */
+.lecturer-item h5 {
+  font-size: 14px; /* Adjust font size as needed */
+  font-weight: normal; /* Adjust font weight as needed */
+  margin-top: 5px; /* Adjust top margin as needed */
+  color: #333; /* Adjust text color as needed */
+}
+.lecturer-item h6 {
+  text-align: center; /* Center the text */
+  color: red; /* Set text color to red */
+  padding-right: 40px;
+}
+
+.filter-container select {
+  width: 200px; /* Adjust width as needed */
+  padding: 8px; /* Adjust padding as needed */
+  font-size: 14px; /* Adjust font size as needed */
+  border: 1px solid #ccc; /* Adjust border properties as needed */
+  border-radius: 4px; /* Adjust border radius as needed */
+  background-color: #fff; /* Adjust background color as needed */
+  color: #333; /* Adjust text color as needed */
+  outline: none; /* Remove default outline */
+}
+
+.filter-container select:focus {
+  border-color: #007bff; /* Change border color on focus */
+}
+
+/* Style dropdown options */
+.filter-container option {
+  font-size: 14px; /* Adjust font size as needed */
+  padding: 8px; /* Adjust padding as needed */
+  background-color: #fff; /* Adjust background color as needed */
+  color: #333; /* Adjust text color as needed */
+}
+
 .lecview-button {
   padding: 10px 15px; /* Adjust padding for a more compact button */
   font-size: 14px; /* Change font size */
@@ -530,7 +425,7 @@ h3 {
     color: #ffffff; /* Text color on hover */
   }
 }
-/* Register button style */
+
 
 
 /* Generic button style */

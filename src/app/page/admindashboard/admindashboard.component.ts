@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { LecturerviewService } from 'src/app/lecturerview.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 
 
@@ -36,6 +37,8 @@ interface lecturer {
 })
 export class AdmindashboardComponent {
   LecturerArray: any[] = [];
+  DepartmentNameArray:any[]=[];
+  DepartmentName:string=';'
   selectedLecturer: any; 
   searchInput: string = '';
   filteredItems: any[] = [];
@@ -45,6 +48,7 @@ export class AdmindashboardComponent {
 
   ngOnInit() {
     this.getAllLecturers();
+    this.getAllDepartments();
   }
 
   getAllLecturers(): void {
@@ -63,7 +67,36 @@ export class AdmindashboardComponent {
     } else {
       this.filteredItems = this.LecturerArray;
     }
+    if(this.filteredItems.length === 0){
+      Swal.fire({
+        position: 'center',
+        icon: 'info',
+        title: 'NOT found',
+        showConfirmButton: false,
+     
+      });
+
+      
+      return;
+    }
   }
+  
+  getAllDepartments(): void {
+    this.http.get<any>('http://localhost:8000/faculty/getAll')
+      .subscribe((resultData: any) => {
+        this.DepartmentNameArray = resultData.data;
+      });
+  }
+
+  filterLecturersByDepartment(): void {
+    if (this.DepartmentName.trim() !== '') {
+      this.filteredItems = this.LecturerArray.filter(lecturer => lecturer.Department === this.DepartmentName);
+    } else {
+      this.filteredItems = this.LecturerArray; // If no department selected, show all lecturers
+    }
+  }
+
+
   
 
   editLecturer(lecturer: any) {

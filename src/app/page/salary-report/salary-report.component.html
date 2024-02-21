@@ -50,11 +50,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let lecturer of LecturerArray">
+        <tr *ngFor="let lecturer of filteredItems">
           <th scope="row"><input class="form-check-input" type="checkbox"></th>
           <td><img src="https://i.imgur.com/VKOeFyS.png" width="25">{{ lecturer.Title }}{{ lecturer.LecturerName }}</td>
-          <td>Department of Information Technology</td>
-          <td>{{ getModuleName(lecturer.LecturerName) }}</td>
+          <td>{{ lecturer.Department }}</td>
+          <td>{{ getModuleName(lecturer.LecturerName) |json}}</td>
           <td>10<br>{{ getPaymentDescription(lecturer) }}</td>
           <td>10*2500</td>
           <td class="fw-bolder">25000</td>
