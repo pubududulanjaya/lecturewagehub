@@ -53,10 +53,11 @@ import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 // service 
 
 import { LecturerService } from 'src/app/lecturer.service';
+import { TimetableComponent } from './page/timetable/timetable.component';
 
 
 // dialog
-
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 
@@ -88,6 +89,7 @@ import { LecturerService } from 'src/app/lecturer.service';
 
     AddfacultyComponent,
     LecturerDetailsComponent,
+    TimetableComponent,
 
     
   
@@ -114,6 +116,8 @@ import { LecturerService } from 'src/app/lecturer.service';
     BrowserAnimationsModule,
     NgxsModule.forRoot([AuthState]),
     NgxsLoggerPluginModule.forRoot(),
+
+    MatNativeDateModule,
   
   ],
   providers: [LecturerService],

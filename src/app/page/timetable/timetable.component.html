@@ -1,0 +1,81 @@
+<a class="back-button" routerLink="/codashboard">Back</a>
+
+<div class="container">
+  <h2><b>Timetable</b></h2>
+
+  <!-- Form to add new timetable entry -->
+  <form id="addTimetableForm" (ngSubmit)="save()">
+
+    <div class="form-field">
+      <label for="date"><b>Date:</b></label>
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Choose a date" name="date" [(ngModel)]="selectedDate" required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>      
+    </div>
+
+    
+    
+
+    <div class="form-field">
+      <label for="lecturerSelect">Select Lecturer:</label>
+      <select id="lecturerSelect" [(ngModel)]="selectedLecturer" name="lecturerSelect" required>
+        <option *ngFor="let lecturer of filteredItems" [value]="lecturer.LecturerName">{{ lecturer.LecturerName }}</option>
+      </select>
+    </div>
+
+    <div class="form-field">
+      <label for="moduleSelect">Select Module:</label>
+      <select id="moduleSelect" [(ngModel)]="selectedModule" name="moduleSelect" required>
+        <option *ngFor="let module of ModuleArray" [value]="module.ModuleName">{{ module.ModuleName }}</option>
+      </select>
+    </div>
+    <div class="time-input-container">
+      <label for="start_time">Start Time:</label>
+      <input type="time" [(ngModel)]="start_time" id="start_time" name="start_time" required (change)="calculateTimeInterval()">
+      
+      <label for="end_time">End Time:</label>
+      <input type="time" [(ngModel)]="end_time" id="end_time" name="end_time" required (change)="calculateTimeInterval()">
+    </div>
+
+      <div *ngIf="timeInterval" class="time-interval">
+    Time Interval: {{ timeInterval }}
+  </div>
+
+    <button type="submit">Add</button>
+  </form>
+
+  <!-- Table to view current timetable -->
+  <div>
+    <h2>Timetable</h2>
+    <table id="timetableTable">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Start Time</th>
+          <th>End Time </th>
+          <th> Time Interval</th>
+          <th>Lecturer</th>
+          <th>Module</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let entry of timetableArray">
+          <td>{{ entry.day }}</td>
+          <td>{{ entry.start_time }}</td>
+          <td>{{ entry.end_time }}</td>
+          <td>{{ entry. timeInterval }}</td>
+          <td>{{ entry.lecturer }}</td>
+          <td>{{ entry.module }}</td>
+
+          <td>
+            <button (click)="edit(entry)">Edit</button>
+            <button (click)="delete(entry)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+</div>

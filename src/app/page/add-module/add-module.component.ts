@@ -18,6 +18,8 @@ export class AddModuleComponent implements OnInit {
   ModuleName: string = '';
   ModuleCode: string = '';
   Hours: string = '';
+  Department: string = '';
+  filteredItems: any[] =[];
 
   constructor(
     private http: HttpClient,
@@ -29,14 +31,23 @@ export class AddModuleComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+      this.Department = this.cookieService.get('Department');
+
+     // Subscribe to route parameters and update Department if provided
+     this.route.params.subscribe(params => {
+       this.Department = params['Department'] || this.Department;
+     });
     this.getAllLecturers();
   }
 
+  
   getAllLecturers() {
-    this.http.get("http://localhost:8000/lectureDetails/getAll")
+    // Assuming you have an API endpoint that returns lecturers filtered by department
+    this.http.get(`http://localhost:8000/lectureDetails/getAll?Department=${this.Department}`)
       .subscribe((resultData: any) => {
         console.log(resultData);
         this.LecturerArray = resultData.data;
+        this.filteredItems=this.LecturerArray.filter(item => item.Department === this.Department );
       });
   }
 
@@ -45,7 +56,8 @@ export class AddModuleComponent implements OnInit {
       ModuleName: this.ModuleName,
       ModuleCode: this.ModuleCode,
       LecturerName: this.selectedLecturer, // Update property name
-      Hours: this.Hours
+      Hours: this.Hours,
+      Department: this.Department,
     };
 
     this.moduleService.addmodule(moduleData)

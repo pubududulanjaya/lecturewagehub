@@ -62,7 +62,7 @@
       <div class="form-field">
         <label for="lecturerSelect">Select Lecturer:</label>
         <select id="lecturerSelect" [(ngModel)]="selectedLecturer" name="lecturerSelect" required>
-          <option *ngFor="let lecturer of LecturerArray" [value]="lecturer.LecturerName">{{ lecturer.LecturerName }}</option>
+          <option *ngFor="let lecturer of filteredItems" [value]="lecturer.LecturerName">{{ lecturer.LecturerName }}</option>
         </select>
       </div>
 

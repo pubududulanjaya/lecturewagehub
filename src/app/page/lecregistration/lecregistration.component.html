@@ -25,12 +25,20 @@
             <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Upload cv</button></div> -->
         </div>
 
-          <div class="row mt-2">
+          <!-- <div class="row mt-2">
             <div class="col-md-12">
                <label class="labels">Lecturer ID</label>
                <input type="text" [(ngModel)]="lecturerId" class="form-control" placeholder="Lecturer ID" disabled>
             </div>
-         </div>
+         </div> -->
+
+         <div class="row mt-2">
+                  
+          <div class="col-md-12"><label class="labels">lecturer EID</label>
+              <input type="text" [(ngModel)]="lecturerId" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Enter lecturer EID" value="">
+          </div>
+         
+      </div>
 
          <!-- <div class="col-md-12">
             <label class="labels">CV</label>
