@@ -4,7 +4,8 @@
     </span>
     <div class="logout-dropdown" id="dropdown">
         <button onclick="changePassword">Change Password</button>
-        <button onclick="logout">Logout</button>
+        <button (click)="logout()">Logout</button>
+
     </div>
 </div>
 
@@ -37,6 +38,10 @@
            <i class="far fa-caret-square-right"></i>
             <span>Add New Batch</span>
           </a>
+          <a routerLink="/timetable">
+            <i class="far fa-caret-square-right"></i>
+             <span>Add Timetable</span>
+           </a>
          <a routerLink="/lecregister">
            <i class="far fa-caret-square-right"></i>
             <span>Add New Lecturer</span>

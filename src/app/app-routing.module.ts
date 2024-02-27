@@ -22,6 +22,7 @@ import { RateHistoryComponent } from './page/rate-history/rate-history.component
 import { AddfacultyComponent } from './page/addfaculty/addfaculty.component';
 
 import { LecturerDetailsComponent } from './lecturer-details/lecturer-details.component';
+import { TimetableComponent } from './page/timetable/timetable.component';
 
 
 const routes: Routes = [
@@ -33,7 +34,7 @@ const routes: Routes = [
   {path:'lecregister',component:LecregistrationComponent},
   {path:'lecprofile/:LecturerName',component:LecprofileComponent},
   {path:'editlecturer/:LecturerName',component:EditlecturerComponent},
-  {path:'HOD-panal',component:HoddashboardComponent},
+  {path:'HOD-panel',component:HoddashboardComponent},
   {path:'add_modul',component:AddModuleComponent},
   {path:'add_batch',component:AddBatchComponent},
   {path:'department_detail',component:DepartmentDetailComponent},
@@ -45,7 +46,7 @@ const routes: Routes = [
   {path:'rate-history',component:RateHistoryComponent},
 
   {path:'addfaculty',component:AddfacultyComponent},
-  
+  {path:'timetable',component:TimetableComponent},
   
   { path: 'lecturer/:LecturerName', component: LecturerDetailsComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },

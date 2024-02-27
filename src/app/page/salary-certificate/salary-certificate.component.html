@@ -1,4 +1,4 @@
-<body>
+<body *ngFor="let lecturer of filteredItems" >
 
     <header>
       <h1><b>  Salary Certificate</b></h1>
@@ -15,13 +15,11 @@
       <h3><b>Certificate of Withholding Tax(WHT) / Advanced Income Tax(AIT) Deduction</b></h3>
   
       <div>
-        <p>Name and address of the Withholdee: {{ lecturerDetails?.LecturerName }}</p>
+        <p>Name and address of the Withholdee: {{ lecturer.Title }}{{ lecturer.LecturerName }} / {{ lecturer.AddressLine1 }} ,{{ lecturer.AddressLine2 }}</p>
       </div><br>
+      
       <div>
-        <p>Name and address of the Withholdee: {{ lecturerDetails?.LecturerName }}</p>
-      </div><br>
-      <div>
-        <p>National Identity Card No./Passport No./Tax Identification No: {{ lecturerDetails?.NIC  }}</p>
+        <p>National Identity Card No./Passport No./Tax Identification No: {{ lecturer.NIC }}</p>
       </div><br>
       
       
@@ -44,7 +42,7 @@
           </tr>
         </thead>
         <tbody>
-          <!-- Add your payment data here -->
+          
           <tr>
             <td>Consultancy fees</td>
             <td>200,000.00</td>

@@ -5,7 +5,8 @@
         </span>
         <div class="logout-dropdown" id="dropdown">
             <button onclick="changePassword">Change Password</button>
-            <button onclick="logout">Logout</button>
+            <button (click)="logout()">Logout</button>
+
         </div>
     </div>
     
@@ -15,11 +16,7 @@
          <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
            </head>
            <body class="navbody">
-             <!-- <input type="checkbox" id="check">
-             <label for="check">
-               <i class="fas fa-bars" id="btn"></i>
-               <i class="fas fa-times" id="cancel"></i>
-             </label> -->
+           
              <div class="sidebar">
                <header>Menu</header>
                <a routerLink="/codashboard/:Department"class="active">
@@ -37,6 +34,11 @@
                <a routerLink="/add_batch"> 
                 <i class="far fa-caret-square-right"></i>
                  <span>Add New Batch</span>
+               </a>
+
+               <a routerLink="/timetable">
+                <i class="far fa-caret-square-right"></i>
+                 <span>Add Timetable</span>
                </a>
               <a routerLink="/lecregister">
                 <i class="far fa-caret-square-right"></i>
@@ -71,11 +73,11 @@
         <div class="coordinator-dashboard">
             <div class="lecturer-list">
                 <!-- Use Angular *ngFor directive to iterate through LecturerArray -->
-                <span *ngFor="let lecturer of LecturerArray">
+                <span *ngFor="let lecturer of filteredItems">
                     <div class="lecturer-item">
                         <span class="lecturer-name">{{ lecturer.Title }} {{ lecturer.LecturerName }}</span>
                         <!-- Edit button -->
-                        <button class="lecview-button" (click)="editLecturer(lecturer.LecturerName)" >Edit</button>
+                        <!-- <button class="lecview-button" (click)="editLecturer(lecturer.LecturerName)" >Edit</button> -->
                     </div>
                 </span>
             </div>

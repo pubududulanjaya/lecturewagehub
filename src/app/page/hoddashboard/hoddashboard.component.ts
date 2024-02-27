@@ -1,7 +1,34 @@
+// Import necessary modules and services
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { LecturerviewService } from 'src/app/lecturerview.service';
-import { AuthService } from 'src/app/auth.service';
+import { CookieService } from 'ngx-cookie-service';
+import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
+
+// Define the Report interface
+interface lecturer {
+  id: string;
+  LecturerName: string;
+  Title:string;
+  MobileNumber:string;
+  NIC:string;
+  AddressLine1:string;
+  AddressLine2:string;
+  State:string;
+  Email:string;
+  SalaryType:string;
+  MonthlyPayment:string;
+  RatePerHour:string;
+  AccountName:string;
+  AccountNumber:string;
+  BankName:string;
+  bankCode:string;
+  BranchName:string;
+  BranchCode:string;
+  Request_State: string;
+  Department:string;
+}
 
 @Component({
   selector: 'app-hoddashboard',
@@ -12,36 +39,37 @@ export class HoddashboardComponent implements OnInit {
   LecturerArray: any[] = [];
   ModuleData: any[] = [];
   selectedLecturer: any;
-  Department: string | null =null;
+  Department: string | null = null;
+  filteredItems: any[] = [];
+  public Request_State: string = '';
 
   constructor(
     private http: HttpClient,
     private lecturerviewService: LecturerviewService,
-    private authService: AuthService
+    private cookieService: CookieService,
+    private router: Router,
+    private route: ActivatedRoute,
   ) {}
 
-  ngOnInit() {
-    console.log("Fetching lecturers...");
+  ngOnInit(): void {
+    this.Department = this.cookieService.get('Department');
+
+    this.route.params.subscribe((params) => {
+      this.Department = params['Department'] || this.Department;
+    });
+
     this.getAllLecturers();
-  
-    console.log("Fetching modules...");
     this.getAllModules();
-  
-    // Fetch and set department name
-    const loggedInUser = this.authService.getLoggedInUser();
-    if (loggedInUser) {
-      this.Department = this.authService.getDepartmentForUser(loggedInUser);
-      console.log("Department Name:", this.Department);
-    }
-  
   }
-  
 
   getAllLecturers() {
-    this.http.get("http://localhost:8000/lectureDetails/getAll")
+    // Assuming you have an API endpoint that returns lecturers filtered by department
+    this.http
+      .get(`http://localhost:8000/lectureDetails/getAll?Department=${this.Department}`)
       .subscribe((resultData: any) => {
-        console.log("Lecturers data:", resultData);
+        console.log(resultData);
         this.LecturerArray = resultData.data;
+        this.filteredItems = this.LecturerArray.filter((item) => item.Department === this.Department);
       });
   }
 
@@ -67,25 +95,6 @@ export class HoddashboardComponent implements OnInit {
     return moduleMatch ? moduleMatch.Hours : 'Not Found';
   }
 
-  approveLecturer(lecturer: any) {
-    // Add your logic for approving a lecturer
-    console.log('Lecturer Approved:', lecturer);
-
-    // You can add logic here to send data to the admin panel
-    // For example, you can make an HTTP request to the admin panel endpoint
-    this.http.post('http://localhost:8000/admin/approveLecturer', lecturer)
-      .subscribe(
-        (response: any) => {
-          console.log('Approval response:', response);
-          // Handle the response as needed
-        },
-        (error: any) => {
-          console.error('Error approving lecturer:', error);
-          // Handle the error as needed
-        }
-      );
-  }
-
   viewStatus(lecturer: any) {
     this.selectedLecturer = lecturer;
     this.lecturerviewService.setLecturer(this.selectedLecturer);
@@ -95,5 +104,37 @@ export class HoddashboardComponent implements OnInit {
     // Add your logic here
     console.log("Viewing all data is complete. Performing additional action.");
     // For example, you can trigger another function or display a message.
+  }
+
+  updateState(data: any): void {
+    const updatedlecturer: lecturer = { ...data, Request_State: 'admin_pendding' };
+    
+    this.http.patch(`http://localhost:8000/lectureDetails/update/${data.id}`, updatedlecturer)
+      .subscribe(
+        (response) => {
+          console.log(response);
+          alert('Report State updated to admin pending');
+          // Assuming the response includes the updated data, you can refresh the view with the updated data
+          this.getAllLecturers(); // Refresh the data after updating the State
+        },
+        (error) => {
+          console.error('Error updating report State:', error);
+        }
+      );
+  }
+  
+
+  logout() {
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Logged out successfully',
+      showConfirmButton: false,
+      timer: 1500
+    }).then(() => {
+      // Clear cookies and navigate to the login page
+      this.cookieService.delete('Department');
+      this.router.navigate(['/login']); // Replace '/login' with the path to your login page
+    });
   }
 }

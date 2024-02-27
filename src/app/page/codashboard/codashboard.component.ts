@@ -1,10 +1,9 @@
-// codashboard.component.ts
-
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LecturerviewService } from 'src/app/lecturerview.service';
 import { CookieService } from 'ngx-cookie-service';
+import Swal from 'sweetalert2'; // Import SweetAlert
+
 @Component({
   selector: 'app-codashboard',
   templateUrl: './codashboard.component.html',
@@ -15,11 +14,10 @@ export class CodashboardComponent implements OnInit {
   selectedLecturer: any;
   searchInput: string = '';
   Department: string='';
-
+  filteredItems: any[] =[];
   constructor(
     private http: HttpClient,
     private router: Router,
-    private lecturerviewService: LecturerviewService,
     private route: ActivatedRoute,
     private cookieService: CookieService
   ) {}
@@ -29,33 +27,19 @@ export class CodashboardComponent implements OnInit {
 
     this.route.params.subscribe(params => {
       this.Department = params['Department'] || this.Department;
+      this.getAllLecturers(); // Fetch lecturers for the current department
     });
-
-    this.getAllLecturers();
   }
+  
 
   getAllLecturers() {
-    this.http.get("http://localhost:8000/lectureDetails/getAll")
+    // Assuming you have an API endpoint that returns lecturers filtered by department
+    this.http.get(`http://localhost:8000/lectureDetails/getAll?Department=${this.Department}`)
       .subscribe((resultData: any) => {
         console.log(resultData);
         this.LecturerArray = resultData.data;
+        this.filteredItems=this.LecturerArray.filter(item => item.Department === this.Department );
       });
-  }
-
-  editLecturer(lecturer: any) {
-    this.lecturerviewService.getLecturerDetails(lecturer.LecturerName.toString()).subscribe(
-      (data) => {
-        this.router.navigate(['/editlecturer', lecturer.LecturerName], { state: { lecturer: data } });
-      },
-      (error) => {
-        console.error('Error fetching lecturer details:', error);
-      }
-    );
-  }
-
-  viewStatus(lecturer: any) {
-    this.selectedLecturer = lecturer;
-    this.lecturerviewService.setLecturer(this.selectedLecturer);
   }
 
   searchLecturers() {
@@ -71,5 +55,19 @@ export class CodashboardComponent implements OnInit {
   handleInputChange(event: any) {
     this.searchInput = event.target.value;
     this.searchLecturers();
+  }
+
+  logout() {
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Logged out successfully',
+      showConfirmButton: false,
+      timer: 1500
+    }).then(() => {
+      // Clear cookies and navigate to the login page
+      this.cookieService.delete('Department');
+      this.router.navigate(['/login']); // Replace '/login' with the path to your login page
+    });
   }
 }

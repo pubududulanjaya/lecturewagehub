@@ -63,6 +63,8 @@
     </body>
 
     <div class="container">
+
+        
         <div class="logout-list_container">
             <h3>Lecturer Name List</h3>
             <div class="Lecturer_Name_List">
@@ -79,18 +81,50 @@
               </div>
             </div>
         </div>
+        <div class="filter-container">
+            <label for="requestStateSelect">Select Request State:</label>
+            <select id="requestStateSelect" [(ngModel)]="Request_State" (change)="filterLecturers()">
+                <option value="admin_pendding">HOD Accepted</option>
+                <option value="accepted">Accepted</option>
+                <!-- Add more options if needed -->
+            </select>
+        </div> 
+
+        <!-- <div class="filter-container">
+            <label for="requestStateSelect">Select Department:</label>
+            <select id="requestStateSelect" [(ngModel)]="DepartmentName" (change)="filterLecturersByDepartment()">
+                <option value="">All Departments</option>
+                <option *ngFor="let department of DepartmentNameArray" [value]="department.DepartmentName">{{ department.DepartmentName }}</option>
+            </select>
+        </div> -->
+
 
         <div class="coordinator-dashboard">
             <div class="lecturer-list">
-                <span *ngFor="let lecturer of LecturerArray">
+                <span  *ngFor="let lecturer of filteredItems">
                     <div class="lecturer-item">
-                        <span class="lecturer-name" [routerLink]="['/lecprofile', lecturer.LecturerName]">{{ lecturer.Title }} {{ lecturer.LecturerName }}</span>
+                        <span class="lecturer-name" [routerLink]="['/lecprofile', lecturer.LecturerName]">{{ lecturer.Title }} {{ lecturer.LecturerName }} <br><h5>{{lecturer.Department}}</h5>
+                        
+                        </span>
+                        <td>
+                            <button *ngIf="lecturer.Request_State === 'admin_pendding'" type="button" class="update-state" (click)="updateState(lecturer)">Accept</button>
+                            <span *ngIf="lecturer.Request_State === 'accepted'" class="checkmark">&#10004;</span>
+                            <span *ngIf="lecturer.Request_State === 'Hod_pendding'"><h6>HOD Not Recommended</h6></span>
+                          </td>
+                          
+                        
                         <button class="lecview-button" (click)="viewStatus(lecturer)">View</button>
+
+
                     </div>
+                   
+                      
                 </span>
             </div>
             
-
+            <div *ngIf="filteredItems.length === 0">
+                <h3>Not found</h3>
+              </div>
             <!-- Modal for viewing lecturer details -->
             <div class="modal fade" id="lecturerDetailsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">

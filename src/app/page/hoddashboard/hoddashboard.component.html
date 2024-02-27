@@ -1,5 +1,18 @@
 <!-- <h2>IT department</h2> -->
-<h2>{{ Department}}</h2>
+
+
+<div class="logout-container">
+    <span class="logout-icon" onclick="toggleDropdown">
+        <img class="login-image" src="assets/images/user.png" alt="Login">
+    </span>
+    <div class="logout-dropdown" id="dropdown">
+        <button onclick="changePassword">Change Password</button>
+        <button (click)="logout()">Logout</button>
+
+    </div>
+</div>
+
+<h3>{{ Department }} Department Dashboard</h3>
 
 <body>
     <table>
@@ -12,13 +25,18 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let lecturer of LecturerArray">
+            <tr *ngFor="let lecturer of filteredItems">
                 <td>{{ lecturer.LecturerName }}</td>
                 <td>{{ getModuleName(lecturer.LecturerName) }}</td>
                 <td>{{ getHours(lecturer.LecturerName) }}</td>
-                <td><button (click)="approveLecturer(lecturer)">Approve</button></td>
+                <td><button *ngIf="lecturer.Request_State === 'Hod_pendding'" type="button" class="update-state" (click)="updateState(lecturer)">Accept</button>
+                    <span *ngIf="lecturer.Request_State === 'admin_pendding'"class="checkmark">admin Pendding</span>
+                </td>
                 <td><button class="view-button" [routerLink]="['/lecturer', lecturer.LecturerName]">View</button></td>
             </tr>
         </tbody>
     </table>
 </body>
+
+
+

@@ -1,18 +1,18 @@
 <a class="back-button" routerLink="/admin_dashboard">Back</a>
 
 <body>
-  <h2>{{ lecturerDetails?.Title }} {{ LecturerName }} Profile</h2>
+  <h2 *ngFor="let lecturer of filteredItems" >{{ lecturer.Title }}{{ LecturerName }} Profile</h2>
 
   <div class="profile-container">
     <div class="photo-container">
       <img src="assets/images/cinec-lec.jpg" alt="Lecturer Photo" width="200" height="200">
     </div>
     <div class="profile-details">
-      <div *ngIf="lecturerDetails" class="profile-info">
-        <span><label>Rate per hour:</label> {{ lecturerDetails.LecturerName }}</span>
-        <span><label>Departments Name:</label> {{ lecturerDetails.Department?.join(', ') }}</span>
-        <span><label>Total Salary:</label> Rs {{ lecturerDetails.MonthlyPayment }}</span>
-        <span><label>Total Hours:</label> {{ lecturerDetails.MonthlyPayment }}</span>
+      <div  *ngFor="let lecturer of filteredItems" class="profile-info">
+        <span><label>Rate per hour:</label>{{ lecturer.RatePerHour }}</span>
+        <span><label>Departments Name:</label>{{ lecturer.Department }}</span>
+        <span><label>Total Salary:</label> {{ lecturer.LecturerName }}</span>
+        <span><label>Total Hours:</label>{{ lecturer.LecturerName }} </span>
       </div>
     </div>
     <div class="bottom-buttons">
@@ -26,8 +26,7 @@
   <div id="scontainer">
     <div id="header">
       <div id="total-salary">
-        <!-- <p>Total Salary: RS. {{ lecturerDetails.LecturerName }}</p>
-        <p>Emp ID: {{ lecturerDetails.LecturerName }}</p> -->
+        
       </div>
       <div id="all-box">
         <select>

@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { LecturerviewService } from 'src/app/lecturerview.service';
 import { PdfGeneratorService } from 'src/app/pdf-generator.service';
 import { OtherpaymentService } from 'src/app/otherpayment.service';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-salary-report',
   templateUrl: './salary-report.component.html',
@@ -15,6 +15,9 @@ export class SalaryReportComponent implements OnInit {
   ModuleData: any[] = [];
   selectedLecturer: any;
   otherPayments: any[] = [];
+  lectureWiseModules:any[]=[];
+  filteredItems: any[] = [];
+  public Request_State: string = '';
 
   constructor(
     private pdfGeneratorService: PdfGeneratorService,
@@ -43,15 +46,32 @@ export class SalaryReportComponent implements OnInit {
       }
     );
   }
-
-  getAllLecturers() {
-    this.http.get("http://localhost:8000/lectureDetails/getAll")
+  getAllLecturers(): void {
+    this.http.get<any>('http://localhost:8000/lectureDetails/getAll')
       .subscribe((resultData: any) => {
-        console.log("Lecturers data:", resultData);
+        console.log(resultData);
         this.LecturerArray = resultData.data;
+        this.filterLecturers(); // Call filterLecturers after data retrieval
       });
   }
+  
+  filterLecturers(): void {
+    this.filteredItems = this.LecturerArray.filter((lecturer) =>
+      lecturer.Request_State === 'accepted' // Filter only lecturers with Request_State as 'accepted'
+    );
+  
+    if (this.filteredItems.length === 0) {
+      Swal.fire({
+        position: 'center',
+        icon: 'info',
+        title: 'NOT found',
+        showConfirmButton: false
+      });
+    }
 
+ 
+  }
+  
   getAllModules() {
     this.http.get("http://localhost:8000/module/getAll")
       .subscribe((resultData: any) => {
@@ -61,8 +81,11 @@ export class SalaryReportComponent implements OnInit {
   }
 
   getModuleName(LecturerName: string): string {
-    const moduleMatch = this.ModuleData.find(module => module.LecturerName === LecturerName);
-    return moduleMatch ? moduleMatch.ModuleName : 'Not Found';
+    const moduleMatch:any[]= this.ModuleData.filter(module => module.LecturerName === LecturerName);
+    // Concatenate module names for the lecturer
+    const moduleNames = moduleMatch.map(item => item.ModuleName).join(', ');
+  
+    return moduleNames || 'Not Found';
   }
 
   getPaymentDescription(lecturer: any): string {
@@ -84,3 +107,4 @@ export class SalaryReportComponent implements OnInit {
     this.lecturerviewService.setLecturer(this.selectedLecturer);
   }
 }
+

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute,Router } from '@angular/router';
 import { BatchService } from 'src/app/batch.service';
 import { CookieService } from 'ngx-cookie-service';
+import Swal from 'sweetalert2'; 
 
 @Component({
   selector: 'app-add-batch',
@@ -13,7 +14,7 @@ export class AddBatchComponent implements OnInit {
   DegreeName: string = '';
   BatchNo: string = '';
 
-  constructor(private route: ActivatedRoute, private batchService: BatchService,private cookieService: CookieService ) {}
+  constructor(private route: ActivatedRoute, private router: Router,private batchService: BatchService,private cookieService: CookieService ) {}
 
   ngOnInit(): void {
     this.Department = this.cookieService.get('Department');
@@ -39,4 +40,18 @@ export class AddBatchComponent implements OnInit {
         }
       });
   }
+  logout() {
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Logged out successfully',
+      showConfirmButton: false,
+      timer: 1500
+    }).then(() => {
+      // Clear cookies and navigate to the login page
+      this.cookieService.delete('Department');
+      this.router.navigate(['/login']); // Replace '/login' with the path to your login page
+    });
+  }
+  
 }

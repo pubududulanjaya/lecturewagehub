@@ -1,8 +1,10 @@
 // login.component.ts
+
 import { Component } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { Router } from '@angular/router';
 import { Login, LoginFailure } from './login.state';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +26,19 @@ export class LoginComponent {
       () => {},
       (error) => {
         console.error('An error occurred:', error);
-        this.store.dispatch(new LoginFailure('An error occurred. Please try again later.'));
+        // Check if the error message is for incorrect username and password
+        if (error === 'Incorrect username or password') {
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Incorrect username or password',
+            showConfirmButton: false,
+            timer: 1500
+          });
+        } else {
+          // For other errors, dispatch the LoginFailure action as usual
+          this.store.dispatch(new LoginFailure('An error occurred. Please try again later.'));
+        }
       }
     );
   }
@@ -34,10 +48,13 @@ export class LoginComponent {
   }
 
   getErrorMessage() {
+    console.log("T------------"+ JSON.stringify(this.store.select(state => state.auth.errorMessage)));  
+    
     return this.store.select(state => state.auth.errorMessage);
   }
 
   getSuccessMessage() {
+    console.log("T------------"+ JSON.stringify(this.store.select(state => state.auth.successMessage)));
     return this.store.select(state => state.auth.successMessage);
   }
 }
