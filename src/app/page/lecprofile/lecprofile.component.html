@@ -8,15 +8,21 @@
       <img src="assets/images/cinec-lec.jpg" alt="Lecturer Photo" width="200" height="200">
     </div>
     <div class="profile-details">
-      <div  *ngFor="let lecturer of filteredItems" class="profile-info">
-        <span><label>Rate per hour:</label>{{ lecturer.RatePerHour }}</span>
-        <span><label>Departments Name:</label>{{ lecturer.Department }}</span>
-        <span><label>Total Salary:</label> {{ lecturer.LecturerName }}</span>
-        <span><label>Total Hours:</label>{{ lecturer.LecturerName }} </span>
+      <div class="profile-details">
+        <div *ngFor="let lecturer of filteredItems" class="profile-info">
+          <span *ngIf="lecturer?.MonthlyPayment"><label>Monthly  Payment:</label>{{ lecturer.MonthlyPayment }}</span>
+          <span *ngIf="lecturer?.RatePerHour"><label>Rate per hour:</label>{{ lecturer.RatePerHour }}</span>
+          <span><label>Departments Name:</label>{{ lecturer.Department }}</span>
+          <span><label>Total Hours:</label>{{ totalHours }} minutes</span>
+          <span *ngIf="lecturer?.RatePerHour"><label>Total Salary:</label>LKR:{{ totalSalary }}</span>
+          <span *ngIf="lecturer?.MonthlyPayment"><label>Total Salary:</label>LKR:{{ lecturer.MonthlyPayment }}</span>
+          
+        </div>
       </div>
+      
     </div>
     <div class="bottom-buttons">
-      <button class="Delete_profile-button">View Profile</button>
+      <button class="Delete_profile-button" [routerLink]="['/view_profile', LecturerName]">View Profile</button>
       <button class="View_Salary_Report-button" [routerLink]="['/salary_Certificate', LecturerName]">View Certificate</button>
       <button class="View_Salary_Report-button" routerLink="/salary_Certificate">Tax Report</button>
       <button class="View_Salary_Report-button" routerLink="/rate-history">Rate History</button>
@@ -37,33 +43,30 @@
       </div>
     </div>
 
-    <table>
-      <thead>
-        <tr>
-          <th>Department</th>
-          <th>Module</th>
-          <th>Date</th>
-          <th>Hours</th>
-          <th>Salary</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Department 1</td>
-          <td>Module 1</td>
-          <td>2023-10-24</td>
-          <td>3</td>
-          <td>RS. 15,000</td>
-        </tr>
-        <tr>
-          <td>Department 2</td>
-          <td>Module 2</td>
-          <td>2023-10-25</td>
-          <td>3</td>
-          <td>Rs. 13,500</td>
-        </tr>
-      </tbody>
-    </table><br>
+   <!-- Add this within the <body> tag -->
+<!-- Add this within the <body> tag -->
+  <table>
+    <thead>
+      <tr>
+        <th>Department</th>
+        <th>Module</th>
+        <th>Date</th>
+        <th>Hours</th>
+        <th>Salary</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of timetableArray">
+        <td>{{ item.Department }}</td>
+        <td>{{ item.module }}</td>
+        <td>{{ item.date }}</td>
+        <td>{{ item.timeInterval }} minutes</td>
+        <td>LKR:{{ item.salary }}</td>
+      </tr>
+    </tbody>
+  </table>
+  
+
 
     <h2>other Payments balance</h2>
     <table>

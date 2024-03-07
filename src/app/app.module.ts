@@ -58,6 +58,7 @@ import { TimetableComponent } from './page/timetable/timetable.component';
 
 // dialog
 import { MatNativeDateModule } from '@angular/material/core';
+import { ViewProfileComponent } from './page/view-profile/view-profile.component';
 
 
 
@@ -90,6 +91,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     AddfacultyComponent,
     LecturerDetailsComponent,
     TimetableComponent,
+    ViewProfileComponent,
 
     
   

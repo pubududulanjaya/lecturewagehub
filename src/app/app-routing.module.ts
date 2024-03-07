@@ -23,7 +23,7 @@ import { AddfacultyComponent } from './page/addfaculty/addfaculty.component';
 
 import { LecturerDetailsComponent } from './lecturer-details/lecturer-details.component';
 import { TimetableComponent } from './page/timetable/timetable.component';
-
+import { ViewProfileComponent } from './page/view-profile/view-profile.component';
 
 const routes: Routes = [
   {path:'',component:HomeComponent},
@@ -47,6 +47,7 @@ const routes: Routes = [
 
   {path:'addfaculty',component:AddfacultyComponent},
   {path:'timetable',component:TimetableComponent},
+  {path:'view_profile/:LecturerName',component:ViewProfileComponent},
   
   { path: 'lecturer/:LecturerName', component: LecturerDetailsComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },

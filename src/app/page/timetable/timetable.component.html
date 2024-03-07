@@ -20,10 +20,17 @@
 
     <div class="form-field">
       <label for="lecturerSelect">Select Lecturer:</label>
-      <select id="lecturerSelect" [(ngModel)]="selectedLecturer" name="lecturerSelect" required>
-        <option *ngFor="let lecturer of filteredItems" [value]="lecturer.LecturerName">{{ lecturer.LecturerName }}</option>
+      <select id="lecturerSelect" [(ngModel)]="selectedLecturer" name="lecturerSelect" required (change)="updateRatePerHour()">
+        <option *ngFor="let lecturer of filteredItems" [value]="lecturer.LecturerName">
+          {{ lecturer.LecturerName }}
+        </option>
       </select>
+      <p>Rate Per Hour: {{ selectedLecturerRate }}</p>
     </div>
+    
+    
+    
+    
 
     <div class="form-field">
       <label for="moduleSelect">Select Module:</label>
@@ -67,7 +74,7 @@
           <td>{{ entry.start_time }}</td>
           <td>{{ entry.end_time }}</td>
           <td>{{ entry. timeInterval }}</td>
-          <td>{{ entry.lecturer }}</td>
+          <td>{{ entry.LecturerName }}</td>
           <td>{{ entry.module }}</td>
 
           <td>

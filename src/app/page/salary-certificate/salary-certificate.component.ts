@@ -5,6 +5,9 @@ import { LecturerService } from 'src/app/lecturer.service';
 import { OtherpaymentService } from 'src/app/otherpayment.service';
 import { HttpClient } from '@angular/common/http';
 import Swal from 'sweetalert2';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { SalaryService } from 'src/app/salary.service'; 
+import { TimetableService } from 'src/app/timetable.service';
 
 @Component({
   selector: 'app-salary-certificate',
@@ -17,13 +20,19 @@ export class SalaryCertificateComponent implements OnInit {
   otherPayments: any[] = []; // Array to store other payment data
   LecturerArray: any[] = []; 
   filteredItems: any[] = []; 
+  timetableArray: any[] = []; 
+  totalHours: number = 0; // Variable to hold total hours
+  totalSalary: number = 0;
 
   constructor(
     private wordFileService: WordFileService,
     private lecturerService: LecturerService,
     private route: ActivatedRoute,
+    private snackBar: MatSnackBar,
     private otherPaymentService: OtherpaymentService, 
     private http: HttpClient,
+    private salaryService: SalaryService,
+    private timetableService: TimetableService, 
   ) {}
 
   ngOnInit(): void {
@@ -40,7 +49,29 @@ export class SalaryCertificateComponent implements OnInit {
           console.error('Error fetching other payments:', error);
         }
       );
+
+      this.timetableService.getTimetable(this.LecturerName).subscribe(
+        (data: any) => {
+          this.timetableArray = data.data;
+
+          // Calculate salary for each timetable item
+          this.salaryService.calculateSalaries(this.timetableArray);
+
+          // Calculate total hours
+          this.totalHours = this.salaryService.calculateTotalHours(this.timetableArray);
+
+          this.totalSalary = this.salaryService.calculateTotalSalary(this.timetableArray);
+
+          
+        },
+        (error) => {
+          console.error('Error fetching timetable:', error);
+          // this.showMessage('Error fetching timetable', 'error-snackbar');
+        }
+      );
     });
+
+    
     this.getAllLecturers();
   }
 

@@ -25,6 +25,7 @@ export class TimetableComponent implements OnInit {
   Department: string = '';
   filteredItems: any[] =[];
   timeInterval: string = '';
+  selectedLecturerRate: number | undefined;
 
   constructor(
     private http: HttpClient,
@@ -44,6 +45,13 @@ export class TimetableComponent implements OnInit {
      });
     this.getTimetableData();
   }
+  
+
+updateRatePerHour(): void {
+  const selectedLecturerObject = this.filteredItems.find(lecturer => lecturer.LecturerName === this.selectedLecturer);
+  this.selectedLecturerRate = selectedLecturerObject ? selectedLecturerObject.RatePerHour : undefined;
+}
+
   calculateTimeInterval(): void {
     if (this.start_time && this.end_time) {
       // Parse start and end times
@@ -57,7 +65,7 @@ export class TimetableComponent implements OnInit {
       const minutes = Math.floor(diff / (1000 * 60));
   
       // Set the time interval
-      this.timeInterval = `${minutes} minutes`;
+      this.timeInterval = `${minutes} `;
     } else {
       this.timeInterval = '';
     }
@@ -75,9 +83,10 @@ export class TimetableComponent implements OnInit {
       start_time: this.start_time,
       end_time:this.end_time,
       timeInterval:this.timeInterval,
-      lecturer:this.selectedLecturer,
+      LecturerName:this.selectedLecturer,
       module: this.selectedModule,
       Department: this.Department,
+      RatePerHour:this.selectedLecturerRate,
     };
 
     this.timetableService.timetable(newEntry).subscribe(
